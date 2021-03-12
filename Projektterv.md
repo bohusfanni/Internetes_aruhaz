@@ -1,17 +1,27 @@
 Internetes áruház Projektterv 
 
 Megbeszélések: 2021.03.04. - Mindenki jelen volt
-2021.03.12 19:00 - Következő megbeszélés
+
+2021.03.12 19:00 - Mindenki jelen volt
+
+2023.03.19 19:00 - Kövi megbeszcsi
 
 Feladatok: 
 
-Egyedmodell: Keve, Fanni
+Egyedmodell: Keve, Fanni, Tomi
+
 E-K diagram: Tomi, Fanni
-Adatfolyam diagram: Tomi, Keve
+
+Adatfolyam diagram: 1.szinten kész
+
 Relációs adatelemzés: Mindenki is
+
 Képernyőtervek: Fanni
-Funkció meghatározás: Mindenki
+
+Funkció meghatározás: Mindenki, kb-re megvannak 
+
 Egyed-esemény mátrix: Tomi, Fanni?
-Szerep-funkció mátrix: FÉLKÉSZ 
+
+Szerep-funkció mátrix: KÉSZ 
 
 
