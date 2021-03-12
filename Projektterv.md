@@ -12,6 +12,6 @@ Relációs adatelemzés: Mindenki is
 Képernyőtervek: Fanni
 Funkció meghatározás: Mindenki
 Egyed-esemény mátrix: Tomi, Fanni?
-Szerep-funkció mátrix: Keve
+Szerep-funkció mátrix: FÉLKÉSZ 
 
 
