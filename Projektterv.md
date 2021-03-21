@@ -24,4 +24,5 @@ Egyed-esemény mátrix: Tomi, Fanni?
 
 Szerep-funkció mátrix: KÉSZ 
 
+2-es szintű AFD: Tomi kész 
 
