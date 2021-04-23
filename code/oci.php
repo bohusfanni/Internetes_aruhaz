@@ -18,7 +18,6 @@ if(!$r){
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
 
-//print_r(oci_fetch_array($stid));
 
 print "<table border='1'>\n";
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
