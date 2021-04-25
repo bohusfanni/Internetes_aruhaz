@@ -85,13 +85,14 @@ create table OSSZEKESZIT(
 create table RENDEL(
  TermekKod NUMBER(20) NOT NULL,
  FOREIGN KEY(TermekKod) REFERENCES TERMEK(TERMEKKOD),
- Azon NUMBER(9),
- FOREIGN KEY(Azon) REFERENCES MEGRENDELES(AZON)
+ Azon NUMBER(9) NOT NULL,
+ FOREIGN KEY(Azon) REFERENCES MEGRENDELES(AZON);
+ Ar NUMBER(10)
+ FOREIGN KEY(Osszeg) REFERENCES TERMEK(Ar);
 );
 
 -- adatbázist feltöltő adatok --
 
-INSERT INTO ELADO VALUES('BALAZS','ASDFG');
 INSERT INTO ELADO VALUES('cica','cica');
 INSERT INTO ELADO VALUES('ASD','ASD');
 INSERT INTO ELADO VALUES('BALAZS','ASDFG');
@@ -115,8 +116,12 @@ INSERT INTO KATEGORIA VALUES('ITALOK');
 INSERT INTO KATEGORIA VALUES('HÚSOK');
 INSERT INTO KATEGORIA VALUES('Édesség');
 INSERT INTO termek VALUES('987654321','500','csoki','mogyoróvajas szelet','','100','Édesség');
+INSERT INTO termek VALUES('462598154','18','zsemle','vizes zsömle','','40','PÉKARU');
 INSERT INTO RGAZDA VALUES('GAZDA1','NEMJELSZO345');
 INSERT INTO FELHASZNALO VALUES('BALAZS','ASDFG','Ficzere Balazs','2134 CSICSERI UTCA 45.',TO_DATE('2000 04 25', 'yyyy mm dd'), 'balazsvagyokhelloszia@gmail.com');
 INSERT INTO FELHASZNALO VALUES('ANYU','ARDFG','Bohus Reka', '3400 NEMECSEK UTCA 3.', TO_DATE('1950 03 02', 'yyyy mm dd'), 'anyunakhivj@gmail.com');
-
+INSERT INTO FELHASZNALO VALUES('KopiTomi','kopitomi','Kopanecz Tamás','2092 Tiefenweg UTCA 21.',TO_DATE('1999 08 27', 'yyyy mm dd'), 'tamas@kopanecz.hu');
+INSERT INTO torzsvasarlo VALUES('BALAZS','1');
+INSERT INTO torzsvasarlo VALUES('ANYU','0');
+INSERT INTO torzsvasarlo VALUES('KopiTomi','2');
 
