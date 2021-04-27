@@ -1,6 +1,6 @@
 <?php
 
-$conn = oci_connect('kopanecz', 'KOPITOMI', 'localhost/XE');
+$conn = oci_connect('ADMIN', 'webshop', 'localhost/XE');
 if (!$conn) {
 	$e = oci_error();
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
