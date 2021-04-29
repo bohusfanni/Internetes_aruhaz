@@ -71,7 +71,7 @@ create table MEGRENDELES(
  Azon NUMBER(9) PRIMARY KEY NOT NULL,
  FelhNev VARCHAR(29),
  Idopont DATE NOT NULL,
- Osszeg NUMBER(11) NOT NULL,
+ Osszeg NUMBER(11),
  FOREIGN KEY(FelhNev) REFERENCES FELHASZNALO(FELHNEV)
  --FOREIGN KEY(TorzsvE) REFERENCES TORZSVASARLO(TORZSVE)
 );
@@ -128,6 +128,10 @@ INSERT INTO termek VALUES('345219875','2000','Lapát','Fa nyelü ásó-lapát','
 INSERT INTO termek VALUES('564821564','600','marha comb','Marha alsó comb filé','124','HÚSOK');
 INSERT INTO termek VALUES('874695123','1700','Férfi fürdőnaddrág','Férfi fürdőnadrág S/M/L/XL/XXL','6','FÉRFI RUHÁZAT');
 INSERT INTO velemeny VALUES('943582','987654321','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
+INSERT INTO velemeny VALUES('546251','428765428','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
 INSERT INTO torzsvasarlo VALUES('BALAZS','1');
 INSERT INTO torzsvasarlo VALUES('ANYU','0');
 INSERT INTO torzsvasarlo VALUES('KopiTomi','1');
+INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,'666');
+INSERT INTO OSSZEKESZIT VALUES('BALAZS','654');
+INSERT INTO RENDEL VALUES('987654321','654');
