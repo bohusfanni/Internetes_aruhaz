@@ -6,6 +6,7 @@ if (!$conn) {
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
 
+
 print ("Elado tabla");
 $stid = oci_parse($conn, 'SELECT * FROM elado');
 if(!$stid) {
@@ -251,9 +252,6 @@ while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 }
 print "</table><br>\n";
 oci_free_statement($stid);
-
-
-
 
 oci_close($conn);
 ?>

@@ -68,9 +68,9 @@ create table TORZSVASARLO(
 );
 
 create table MEGRENDELES(
- Azon NUMBER(9) PRIMARY KEY NOT NULL,
+ Azon NUMBER(20) PRIMARY KEY NOT NULL,
  FelhNev VARCHAR(29),
- Idopont DATE NOT NULL,
+ Idopont DATE,
  Osszeg NUMBER(11),
  FOREIGN KEY(FelhNev) REFERENCES FELHASZNALO(FELHNEV)
  --FOREIGN KEY(TorzsvE) REFERENCES TORZSVASARLO(TORZSVE)
@@ -86,52 +86,51 @@ create table OSSZEKESZIT(
 create table RENDEL(
  nev VARCHAR2(30) NOT NULL,
  FOREIGN KEY(Nev) REFERENCES TERMEK(NEV),
- Azon NUMBER(9) NOT NULL,
- FOREIGN KEY(Azon) REFERENCES MEGRENDELES(AZON),
- Darab NUMBER(5)
+ FelhNev VARCHAR(29) NOT NULL,
+ FOREIGN KEY(FelhNev) REFERENCES FELHASZNALO(FELHNEV),
+ Darab NUMBER(5),
+ Ar NUMBER(10),
+ FOREIGN KEY(Ar) REFERENCES TERMEK(AR)
 );
 
 -- adatbázist feltöltő adatok --
-INSERT INTO KATEGORIA VALUES('PÉKÁRÚ');
-INSERT INTO KATEGORIA VALUES('NŐI RUHÁZAT');
-INSERT INTO KATEGORIA VALUES('FÉRFI RUHÁZAT');
-INSERT INTO KATEGORIA VALUES('GYERMEK RUHÁZAT');
-INSERT INTO KATEGORIA VALUES('TEJTERMÉKEK');
-INSERT INTO KATEGORIA VALUES('KERT');
-INSERT INTO KATEGORIA VALUES('ALKOHOLOS ITALOK');
-INSERT INTO KATEGORIA VALUES('ITALOK');
-INSERT INTO KATEGORIA VALUES('HÚSOK');
+INSERT INTO MEGRENDELES VALUES(dbms_random.value(1,999),'','','');
+
+INSERT INTO KATEGORIA VALUES('Pekaru');
+INSERT INTO KATEGORIA VALUES('Noi ruahzat');
+INSERT INTO KATEGORIA VALUES('Ferfi ruhazat');
+INSERT INTO KATEGORIA VALUES('Gyermek ruhazat');
+INSERT INTO KATEGORIA VALUES('Tejtermek');
+INSERT INTO KATEGORIA VALUES('Kert');
+INSERT INTO KATEGORIA VALUES('Alkoholos italok');
+INSERT INTO KATEGORIA VALUES('Uditok');
+INSERT INTO KATEGORIA VALUES('Husok');
 INSERT INTO KATEGORIA VALUES('Édesség');
-INSERT INTO ELADO VALUES('cica','cica');
-INSERT INTO ELADO VALUES('ASD','ASD');
+INSERT INTO ELADO VALUES('Cicus','cica');
 INSERT INTO ELADO VALUES('BALAZS','ASDFG');
 INSERT INTO ELADO VALUES('ELADO','ASD');
-INSERT INTO ELADO VALUES('Valcsika','igen');
 INSERT INTO ELADO VALUES('Vali','nem');
 INSERT INTO ELADO VALUES('Warwick','lol');
-INSERT INTO ELADO VALUES('NEM','ztu');
-INSERT INTO ELADO VALUES('Hello','dfr');
-INSERT INTO ELADO VALUES('Adatb','cbv');
 INSERT INTO ELADO VALUES('Fanni','dfd');
 INSERT INTO RGAZDA VALUES('GAZDA1','NEMJELSZO345');
 INSERT INTO letrehoz VALUES('GAZDA1','Fanni');
 INSERT INTO letrehoz VALUES('GAZDA1','Warwick');
 INSERT INTO letrehoz VALUES('GAZDA1','BALAZS');
 INSERT INTO letrehoz VALUES('GAZDA1','Vali');
-INSERT INTO letrehoz VALUES('GAZDA1','cica');
+INSERT INTO letrehoz VALUES('GAZDA1','Cicus');
 INSERT INTO FELHASZNALO VALUES('BALAZS','ASDFG','Ficzere Balazs','2134 CSICSERI UTCA 45.',TO_DATE('2000 04 25', 'yyyy mm dd'), 'balazsvagyokhelloszia@gmail.com');
 INSERT INTO FELHASZNALO VALUES('ANYU','ARDFG','Bohus Reka', '3400 NEMECSEK UTCA 3.', TO_DATE('1950 03 02', 'yyyy mm dd'), 'anyunakhivj@gmail.com');
 INSERT INTO FELHASZNALO VALUES('KopiTomi','kopitomi','Kopanecz Tamás','2092 Tiefenweg UTCA 21.',TO_DATE('1999 08 27', 'yyyy mm dd'), 'tamas@kopanecz.hu');
 INSERT INTO FELHASZNALO VALUES('Keve','keve12','Kalotay Keve','6725 Alkony utca 31.',TO_DATE('1999 06 14', 'yyyy mm dd'), 'kkeve@gmail.com');
 INSERT INTO FELHASZNALO VALUES('Bence','x3eznt','Sárossy Bence','6485 Sarló utca 44.',TO_DATE('2000 10 10', 'yyyy mm dd'), 'bence@gmail.com');
 INSERT INTO FELHASZNALO VALUES('Gezuka','mrnobody','Gyüre Géza','2099 Kerekes utca 39.',TO_DATE('1996 09 25', 'yyyy mm dd'), 'ggeza@gmail.com');
-INSERT INTO FELHASZNALO VALUES('Sajtostaller','kecsap','Kiss Pista','6726 Csemegi utca 49.',TO_DATE('1876 05 20', 'yyyy mm dd'), 'sajtos.taller@gmail.com');
+INSERT INTO FELHASZNALO VALUES('Sajtostaller','kecsap','Kiss Pista','6726 Csemege utca 49.',TO_DATE('1876 05 20', 'yyyy mm dd'), 'sajtos.taller@gmail.com');
 INSERT INTO termek VALUES('987654321','500','csoki','mogyoróvajas szelet','100','Édesség');
-INSERT INTO termek VALUES('462598154','18','zsemle','vizes zsömle','40','PÉKÁRÚ');
-INSERT INTO termek VALUES('428765428','10000','Tokaji aszú','6 puttonyos Tokaji borkülönlegesség','10','ALKOHOLOS ITALOK');
-INSERT INTO termek VALUES('345219875','2000','Lapát','Fa nyelü ásó-lapát','16','KERT');
-INSERT INTO termek VALUES('564821564','600','marha comb','Marha alsó comb filé','124','HÚSOK');
-INSERT INTO termek VALUES('874695123','1700','Férfi fürdőnaddrág','Férfi fürdőnadrág S/M/L/XL/XXL','6','FÉRFI RUHÁZAT');
+INSERT INTO termek VALUES('462598154','18','zsemle','vizes zsömle','40','Pekaru');
+INSERT INTO termek VALUES('428765428','10000','Tokaji aszú','6 puttonyos Tokaji borkülönlegesség','10','Alkoholos italok');
+INSERT INTO termek VALUES('345219875','2000','Lapát','Fa nyelü ásó-lapát','16','Kert');
+INSERT INTO termek VALUES('564821564','600','marha comb','Marha alsó comb filé','124','Husok');
+INSERT INTO termek VALUES('874695123','1700','Férfi fürdőnaddrág','Férfi fürdőnadrág S/M/L/XL/XXL','6','Ferfi ruhazat');
 INSERT INTO velemeny VALUES('943582','987654321','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
 INSERT INTO velemeny VALUES('546251','428765428','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
 INSERT INTO torzsvasarlo VALUES('BALAZS','1');
@@ -146,9 +145,9 @@ INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,'');
 INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,'');
 INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,'');
 INSERT INTO OSSZEKESZIT VALUES('BALAZS','654');
-INSERT INTO RENDEL VALUES('csoki','654','4');
-INSERT INTO RENDEL VALUES('Lapát','654','1');
-INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','654','1');
-INSERT INTO RENDEL VALUES('csoki','513','9');
-INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','513','1');
-INSERT INTO RENDEL VALUES('Lapát','513','2');
+INSERT INTO RENDEL VALUES('csoki','KopiTomi','4');
+INSERT INTO RENDEL VALUES('Lapát','KopiTomi','1');
+INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','KopiTomi','1');
+INSERT INTO RENDEL VALUES('csoki','Bence','9');
+INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','Bence','1');
+INSERT INTO RENDEL VALUES('Lapát','Bence','2');
