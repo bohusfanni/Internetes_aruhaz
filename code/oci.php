@@ -1,11 +1,10 @@
 <?php
 
-$conn = oci_connect('ADMIN', 'webshop', 'localhost/XE');
+$conn = oci_connect('ADMIN', 'webshop', 'localhost/XE','UTF8');
 if (!$conn) {
 	$e = oci_error();
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-
 
 print ("Elado tabla");
 $stid = oci_parse($conn, 'SELECT * FROM elado');
@@ -31,7 +30,8 @@ oci_free_statement($stid);
 
 
 print ("felhasznalo tabla");
-$stid2 = oci_parse($conn, 'SELECT * FROM felhasznalo');
+
+$stid2 = oci_parse($conn, 'SELECT szuldatum FROM felhasznalo');
 if(!$stid2) {
 	$e = oci_error($conn);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);

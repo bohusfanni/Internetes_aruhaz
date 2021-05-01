@@ -43,7 +43,7 @@ create table FELHASZNALO(
 
 create table TERMEK(
   TermekKod NUMBER(20) NOT NULL,
-  Ar NUMBER(10) NOT NULL,
+  Ar NUMBER(10) UNIQUE  NOT NULL,
   nev VARCHAR2(30)UNIQUE NOT NULL,
   Leiras VARCHAR(102),
   DarabSzam Number(5),
@@ -71,7 +71,7 @@ create table MEGRENDELES(
  Azon NUMBER(20) PRIMARY KEY NOT NULL,
  FelhNev VARCHAR(29),
  Idopont DATE,
- Osszeg NUMBER(11),
+ Osszeg INT DEFAULT 0,
  FOREIGN KEY(FelhNev) REFERENCES FELHASZNALO(FELHNEV)
  --FOREIGN KEY(TorzsvE) REFERENCES TORZSVASARLO(TORZSVE)
 );
@@ -94,7 +94,7 @@ create table RENDEL(
 );
 
 -- adatbázist feltöltő adatok --
-INSERT INTO MEGRENDELES VALUES(dbms_random.value(1,999),'','','');
+INSERT INTO MEGRENDELES VALUES(dbms_random.value(100,999),'','','');
 
 INSERT INTO KATEGORIA VALUES('Pekaru');
 INSERT INTO KATEGORIA VALUES('Noi ruahzat');
@@ -106,6 +106,7 @@ INSERT INTO KATEGORIA VALUES('Alkoholos italok');
 INSERT INTO KATEGORIA VALUES('Uditok');
 INSERT INTO KATEGORIA VALUES('Husok');
 INSERT INTO KATEGORIA VALUES('Édesség');
+INSERT INTO ELADO VALUES('ááááááá','ááááááá');
 INSERT INTO ELADO VALUES('Cicus','cica');
 INSERT INTO ELADO VALUES('BALAZS','ASDFG');
 INSERT INTO ELADO VALUES('ELADO','ASD');
@@ -140,14 +141,14 @@ INSERT INTO torzsvasarlo VALUES('Keve','1');
 INSERT INTO torzsvasarlo VALUES('Gezuka','1');
 INSERT INTO torzsvasarlo VALUES('Bence','0');
 INSERT INTO torzsvasarlo VALUES('Sajtostaller','0');
-INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,'');
-INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,'');
-INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,'');
-INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,'');
-INSERT INTO OSSZEKESZIT VALUES('BALAZS','654');
+INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,DEFAULT);
+INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,DEFAULT);
+INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,DEFAULT);
+INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,DEFAULT);
+--INSERT INTO OSSZEKESZIT VALUES('BALAZS','654');
 INSERT INTO RENDEL VALUES('csoki','KopiTomi','4');
-INSERT INTO RENDEL VALUES('Lapát','KopiTomi','1');
-INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','KopiTomi','1');
-INSERT INTO RENDEL VALUES('csoki','Bence','9');
-INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','Bence','1');
-INSERT INTO RENDEL VALUES('Lapát','Bence','2');
+INSERT INTO RENDEL VALUES('Lapát','KopiTomi','1','');
+INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','KopiTomi','1','');
+INSERT INTO RENDEL VALUES('csoki','Bence','9','');
+INSERT INTO RENDEL VALUES('Férfi fürdőnaddrág','Bence','1','');
+INSERT INTO RENDEL VALUES('Lapát','Bence','2','');
