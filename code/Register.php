@@ -1,63 +1,19 @@
 <?php
+    $conn = oci_connect('ADMIN', 'webshop', 'localhost/XE','UTF8');
+    if (!$conn) {
+        $e = oci_error();
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
 
- ];
- if (isset($_POST["reg"])) {
- $Email = $_POST["Email"]; // beírt adatok lekérése
- $password = $_POST["pwd"];
- $name=$_POST["name"];
- $phonenumber=$_POST["phonenumber"];
+ if (isset($_POST["Registration"])) {
+     $Usename = $_POST["FelhNev"];
+     $password = $_POST["Jelszo"];
+     $Email = $_POST["Email"];
+     $Name = $_POST["Nev"];
+     $Lakcim=$_POST["Lakcim"];
+     $Szul_datum = $_POST["SzulDatum"];
  
- else
- 
- foreach () {
- if (["Email"] === $Email) // már foglalt felhasználónév
- die("<b>HIBA:</b> A felhasználónév már foglalt!");
  }
- if (strlen($password) < 5) // 5 karakternél rövidebb jelszó
- die("<b>HIBA:</b> A jelszó túl rövid!");
-
- 
-
-
- // sikeres regisztráció
- [] = ["username" => $username, "password" => $password];
- echo "Sikeres regisztráció! <br/>";
- }
- 
-    <form class="c-form two-column-layout right" method="post">
-
-
-        <h3>Regisztráció</h3>
-
-
-
-        <fieldset>
-            <label for="reg_email">E-mail cím</label>
-            <input type="email" name="email" id="reg_email" value="" required="required"> <br>
-            <label for="reg_password">Jelszó</label>
-            <input type="password" name="password" id="password" required="required"><br>
-            <label for="name">Név</label>
-            <input type="text" name="name" id="name" value="" required="required"> <br>
-            <label for="number">Telefonszám</label>
-            <input type="text" name="telephone" id="number" value="" required="required"> <br>
-
-
-            <div><p>A személyes adatokat a weboldalon történõ vásárlási élmény fenntartásához, a fiókhoz való hozzáférés kezeléséhez és más célokra használjuk, melyeket a <a href="" class="woocommerce-privacy-policy-link" target="_blank">adatkezelési tájékoztató</a> tartalmaz.</p>
-            </div>
-            <p class="form-row validate-required">
-                <label for="gdpr_accept">
-                    <input type="checkbox" name="gdpr_accept" id="gdpr_accept" class="checkbox" required="required">
-                    Elolvastam és elfogadom az <a href="">adatkezelési szabályzatot.</a>		<span class="required">*</span>
-                </label>
-            </p>
-            <input type="Submit" name="signup" value="Regisztráció">
-        </fieldset>
-    </form>
-
-
-
-
-<?php
     $accounts = loadUser("");
     $name="";
     $email="";
@@ -74,24 +30,24 @@
         $pass=$_POST["password"];
         $tel=$_POST["telephone"];
 
-        // A felhaszálóné már foglalt
+        // A felhaszï¿½lï¿½nï¿½ mï¿½r foglalt
 
         foreach ($accounts as $account){
             if ($account["email"]===$email){
-                $errors[]="Az email cím már foglalt!";
+                $errors[]="Az email cï¿½m mï¿½r foglalt!";
             }
 
         }
-        // A jelszó legalább 5 karakter
+        // A jelszï¿½ legalï¿½bb 5 karakter
         if (strlen($pass)<5){
-            $errors[]="A jelszó túl rövid!";
+            $errors[]="A jelszï¿½ tï¿½l rï¿½vid!";
 
         }
-        // Jelszónak tartalmaznia kell betût és számot is
+        // Jelszï¿½nak tartalmaznia kell betï¿½t ï¿½s szï¿½mot is
 
 
         if (count($errors)===0){
-            echo "Sikeres regisztáció! <br>";
+            echo "Sikeres regisztï¿½ciï¿½! <br>";
 
             $data =[
                     "name"=>$name,
