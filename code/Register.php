@@ -1,77 +1,44 @@
 <?php
-    $conn = oci_connect('ADMIN', 'webshop', 'localhost/XE','UTF8');
-    if (!$conn) {
-        $e = oci_error();
-        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+   include "dbconn.php";
+   $result=null;
+   $row=null;
+   $connection = DBconnection::getInstance();
+   
+   if(isset($_POST["submit-register"])){
+    $statementN = $connection->parseQuery("SELECT FelhNev FROM FELHASZNALO WHERE FelhNev='".$_POST["username"]."'");
+    $statementE = $connection->parseQuery("SELECT FelhNev FROM FELHASZNALO WHERE Jelszo='".$_POST["email"]."'");
+    $resultN = oci_execute($statementN);
+    $countN=0;
+    while(oci_fetch_array($statementN)){
+        $countN++;
     }
+    if($countN>0){
+        echo "<script type=\"text/javascript\">
+                window.location.replace('register.php?error=username');
+              </script>";
+    }
+    $resultE = oci_execute($statementE);
+    $countE=0;
+    while(oci_fetch_array($statementE)){
+        $countE++;
+    }
+    if($countE>0){
+        echo "<script type=\"text/javascript\">
+                window.location.replace('register.php?error=email');
+              </script>";
+    }
+    $res = $connection->insertInto("FELHASZNALO", array("Nev"=>$_POST["name"],"FelhNev"=>$_POST["username"], "Email"=>$_POST["email"], "Jelszo"=>hash("MD5", $_POST["password"]), "Lakcim"=>["lakcim"], "SzulDatum"=>$_POST["date"]));
+    oci_commit($connection->conn);
 
- if (isset($_POST["Registration"])) {
-     $Usename = $_POST["FelhNev"];
-     $password = $_POST["Jelszo"];
-     $Email = $_POST["Email"];
-     $Name = $_POST["Nev"];
-     $Lakcim=$_POST["Lakcim"];
-     $Szul_datum = $_POST["SzulDatum"];
- 
- }
-    $accounts = loadUser("");
-    $name="";
-    $email="";
-    $pass="";
-    $tel="";
-
-    $errors=[];
-
-    if (isset($_POST["signup"])){
-
-
-        $name=$_POST["name"];
-        $email=$_POST["email"];
-        $pass=$_POST["password"];
-        $tel=$_POST["telephone"];
-
-        // A felhasz�l�n� m�r foglalt
-
-        foreach ($accounts as $account){
-            if ($account["email"]===$email){
-                $errors[]="Az email c�m m�r foglalt!";
-            }
-
+}else{
+    if(isset($_GET["error"])){
+        if($_GET["error"]=="name"){
+            $errorMessage="A felhasználónév már foglalt.";
+        }elseif($_GET["error"]=="email") {
+            $errorMessage = "Az e-mail cím már foglalt.";
         }
-        // A jelsz� legal�bb 5 karakter
-        if (strlen($pass)<5){
-            $errors[]="A jelsz� t�l r�vid!";
-
-        }
-        // Jelsz�nak tartalmaznia kell bet�t �s sz�mot is
-
-
-        if (count($errors)===0){
-            echo "Sikeres regiszt�ci�! <br>";
-
-            $data =[
-                    "name"=>$name,
-                    "email"=>$email,
-                    "password"=>$pass,
-                    "telephone number"=>$tel
-                    ];
-
-            saveUser("adatok.txt",$data);
-
-
-        }
-        else{
-
-            foreach ($errors as $error){
-                echo $error . "<br>";
-
-
-            }
-
-        }
-
-
-
+        echo "<div id=error>".$errorMessage."</div>";
+    }
 
 
     }
