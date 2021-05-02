@@ -1,10 +1,10 @@
 
 CREATE OR REPLACE TRIGGER megrendel
-AFTER INSERT OR UPDATE ON Rendel
-FOR EACH ROW    
+AFTER INSERT OR UPDATE OR DELETE ON Rendel
 BEGIN
-  UPDATE MEGRENDELES.OSSZEG
-  SET MEGRENDELES.OSSZEG = MEGRENDELES.OSSZEG + (AR * DARAB)
-  WHERE FELHNEV = MEGRENDELES.FELHNEV;
-END megrendel;
-/
+  UPDATE megrendeles
+  SET megrendeles.osszeg = megrendeles.osszeg + (rendel.ar * rendel.darab)
+  WHERE felhnev = megrendeles.felhnev;
+END;
+
+
