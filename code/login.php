@@ -1,9 +1,9 @@
 <?php
-include "dbconnection.php";
+include "dbconn.php";
 
 session_start ();
 $connection = DBconnection::getInstance();
-$statement = $connection->select(array("Jelszo"), array("Felhnev"), "Felhnev='".$_POST["uname"]."' AND Jelszo='".hash("MD5", $_POST["psw"])."'");
+$statement = $connection->select(array("Jelszo"), array("FELHASZNALO"), "FelhNev='".$_POST["uname"]."' AND Jelszo='".hash("MD5", $_POST["psw"])."'");
 $result = oci_execute($statement);
 $returned_rows = 0;
 $nev="";
@@ -14,10 +14,10 @@ while($row = oci_fetch_array($statement, OCI_ASSOC)){
     $nev=$row["NEV"];
 }
 if($returned_rows!=1){
-    echo "Sikertelen bejelentkezés";
-
-    elseif{
-    echo "Üdvözlöm ".$nev.", hamarosan átirányítom a fõoldalra";
+    echo "Sikertelen bejelentkezï¿½s";
+/* itt van valami baj : Parse error: syntax error, unexpected '{', expecting '(' in C:\xampp\htdocs\Internetes_aruhaz\code\login.php on line 19 */
+}elseif{
+    echo "ï¿½dvï¿½zlï¿½m ".$nev.", hamarosan ï¿½tirï¿½nyï¿½tom a fï¿½oldalra";
     session_start();
     $_SESSION["fnev"]=$nev;
     $statement = $connection->parseQuery("SELECT Felhanev FROM Rgazda WHERE Felhanev='".$nev."'");
@@ -27,11 +27,11 @@ if($returned_rows!=1){
         $count++;
         echo "ADMIN!";
     }
+}
     if($count==1){
-  $_SESSION["admin"]=true;
-    }
-    else{
-    echo "Üdvözlöm ".$nev.", hamarosan átirányítom a fõoldalra";
+      $_SESSION["admin"]=true;
+    }else{
+    echo "ï¿½dvï¿½zlï¿½m ".$nev.", hamarosan ï¿½tirï¿½nyï¿½tom a fï¿½oldalra";
     session_start();
     $_SESSION["fnev"]=$nev;
     $statement = $connection->parseQuery("SELECT felhasznnev FROM Elado WHERE felhasznev='".$nev."'");
@@ -44,6 +44,5 @@ if($returned_rows!=1){
     if($count==1){
   $_SESSION["elado"]=true;
     }
-die();
-
+  }
 ?>
