@@ -37,6 +37,6 @@ if ($row = 1) {
    } 
    oci_free_statement($stid);
    oci_close($con->getConnection());
-   //header("Location: http://localhost/Internetes_aruhaz/code/main.php");
+   header("Location: http://localhost/Internetes_aruhaz/code/main.php");
    //header function locates you to a welcome page saved s wel.php
     ?>

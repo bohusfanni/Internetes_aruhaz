@@ -143,19 +143,19 @@
            session_start();
            if(isset($_SESSION['Felhanev'])){
                echo "you logged in as </br>", $_SESSION['Felhanev'];
-               echo "<br/><a href='login/logout.php'>logout</a>";
+               echo "<br/><a href='logout.php'>logout</a>";
        } 
            
            ?>
                 <button onclick="document.getElementById('bejel').style.display='block'" type="button" class="btn btn-secondary" >Bejelentkezés</button>
-                <button type="button" class="btn btn-secondary" ><a href="admin/admin_login.html">Admin Bejelentkezés</a></button>
-                <button type="button" class="btn btn-secondary" ><a href="registration/registration.html">Regisztráció</a></button>
+                <button type="button" class="btn btn-secondary" ><a href="admin_login.html">Admin Bejelentkezés</a></button>
+                <button type="button" class="btn btn-secondary" ><a href="registration.html">Regisztráció</a></button>
 
             </div>
         </form>
         <!--EZ ITT A LOGIN RÉSZ-->
         <div id="bejel" class="modal">
-            <form class="modal-content animate" action="login/login.php" method="POST">
+            <form class="modal-content animate" action="login.php" method="POST">
                 <div class="container">
                     <label><b>Felhasználónév</b></label>
                     <input type="text" placeholder="Felhasználónév" name="uname" required>
