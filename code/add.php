@@ -38,27 +38,27 @@
 <form method="POST" action="additem.php" accept-charset="utf-8">
     <div class="form-group">
         <label for="itemid">Termékkód</label>
-        <input type="text" class="form-control" id="itemid" placeholder="Termékkód">
+        <input type="text" name="itemid" class="form-control" id="itemid" placeholder="Termékkód">
     </div>
     <div class="form-group">
         <label for="price">Ár</label>
-        <input type="number" class="form-control" id="price" placeholder="Ár">
+        <input type="number" name="price" class="form-control" id="price" placeholder="Ár">
     </div>
     <div class="form-group">
         <label for="itemname">Név</label>
-        <input type="text" class="form-control" id="itemname" placeholder="Név">
+        <input type="text" name="itemname" class="form-control" id="itemname" placeholder="Név">
     </div>
     <div class="form-group">
         <label for="what">Leírás</label>
-        <input type="text" class="form-control" id="what" placeholder="Leírás">
+        <input type="text" name="what" class="form-control" id="what" placeholder="Leírás">
     </div>
     <div class="form-group">
         <label for="amount">Darabszám</label>
-        <input type="number" class="form-control" id="amount" placeholder="Darabszám">
+        <input type="number" name="amount" class="form-control" id="amount" placeholder="Darabszám">
     </div>
     <div class="form-group">
         <label for="cat">Kategória</label>
-        <input type="text" class="form-control" id="cat" placeholder="Kategória">
+        <input type="text" name="cat" class="form-control" id="cat" placeholder="Kategória">
     </div>
     <div class="text-center">
         <input type="submit" class="btn btn-outline-dark" value="Mentés"></input>
