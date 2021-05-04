@@ -4,15 +4,19 @@ session_start();
    $connection = DBconnection::getInstance();
    
    if(isset($_POST['itemid'])){ 
+
        echo"az if j�";
+
    $itemid = $_POST['itemid'];
     $price = $_POST['price'];
     $itemname = $_POST['itemname'];
     $what = $_POST['what'];
     $amount = $_POST['amount'];
+
     $cat = $_POST['cat'];   
      
     $query = "INSERT INTO TERMEK(TermekKod, Ar, nev, Leiras, DarabSzam, Kategoria) VALUES (:itemid, :price, :itemname, :what, :amount, :cat)";
+
     
     $res = oci_parse($connection->getConnection(), $query);
 
