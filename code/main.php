@@ -191,14 +191,6 @@
 </div>
 <div class="container" id="linkek">
     <ul class="nav nav-tabs">
-        
-           <?php
-            if(isset($_SESSION['Felhanev'])){
-            echo "<li class='nav-item'>";
-            echo "<a class='nav-link active' href='#'>Eladó Létrehozás</a>";
-            echo "</li>";
-            }
-           ?> 
         <li class="nav-item">
           <a class="nav-link active" href="#">Élelmiszer</a>
         </li>
@@ -211,6 +203,23 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Kapcsolat</a>
         </li>
+        <?php
+            if(isset($_SESSION['Felhanev'])){
+            echo "<li class='nav-item'>";
+            echo "<a class='nav-link' href='eladoreg.html'>Eladó Létrehozás</a>";
+            echo "</li>";
+            }
+            if(isset($_SESSION['Felhnev'])){
+                echo "<li class='nav-item'>";
+                echo "<a class='nav-link' href='profil.html'>Profil</a>";
+                echo "</li>";
+                }
+                if(isset($_SESSION['Felhasznev'])){
+                    echo "<li class='nav-item'>";
+                    echo "<a class='nav-link' href=''>Termék macera</a>";
+                    echo "</li>";
+                    }
+        ?> 
       </ul>
 </div>
 
