@@ -211,7 +211,7 @@
             }
             if(isset($_SESSION['Felhnev'])){
                 echo "<li class='nav-item'>";
-                echo "<a class='nav-link' href='profil.html'>Profil</a>";
+                echo "<a class='nav-link' href='profil.php'>Profil</a>";
                 echo "</li>";
                 }
                 if(isset($_SESSION['Felhasznev'])){

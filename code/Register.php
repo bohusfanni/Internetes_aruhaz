@@ -1,33 +1,29 @@
 <?php
    include "dbconn.php";
-   $result=null;
-   $row=null;
    $connection = DBconnection::getInstance();
+
    
-   if(isset($_POST["submit-register"])){
-    $statementN = $connection->parseQuery("SELECT FelhNev FROM FELHASZNALO WHERE FelhNev='".$_POST["username"]."'");
-    $statementE = $connection->parseQuery("SELECT FelhNev FROM FELHASZNALO WHERE Jelszo='".$_POST["email"]."'");
-    $resultN = oci_execute($statementN);
-    $countN=0;
-    while(oci_fetch_array($statementN)){
-        $countN++;
-    }
-    if($countN>0){
-        echo "<script type=\"text/javascript\">
-                window.location.replace('register.php?error=username');
-              </script>";
-    }
-    $resultE = oci_execute($statementE);
-    $countE=0;
-    while(oci_fetch_array($statementE)){
-        $countE++;
-    }
-    if($countE>0){
-        echo "<script type=\"text/javascript\">
-                window.location.replace('register.php?error=email');
-              </script>";
-    }
-    $res = $connection->insertInto("FELHASZNALO", array("Nev"=>$_POST["name"],"FelhNev"=>$_POST["username"], "Email"=>$_POST["email"], "Jelszo"=>hash("MD5", $_POST["password"]), "Lakcim"=>["lakcim"], "SzulDatum"=>$_POST["date"]));
+    $name = $_POST['uname'];
+    $password = $_POST['pwd'];
+    $email = $_POST['email'];
+    $nev = $_POST['nev'];
+    $cim = $_POST['cim'];
+    $szdate = $_POST['szuldate'];
+
+   if(isset($_POST["submit"])){
+    $statementN = $connection->parseQuery("SELECT * FROM FELHASZNALO WHERE FelhNev= :username");
+  
+    $query = "INSERT INTO FELHASZNALO(FelhNev, Jelszo, Nev, Lakcim, Szuldatum, Email) VALUES (:username, :pwd, :email, :nev, :cim, :szdate)";
+
+    $res = oci_parse($connection, $query);
+
+    oci_bind_by_name($res, ':username', $_POST['uname']);
+    oci_bind_by_name($res, ':pwd', $_POST['pwd']);
+    oci_bind_by_name($res, ':email', $_POST['email']);
+    oci_bind_by_name($res, ':nev', $_POST['nev']);
+    oci_bind_by_name($res, ':cim', $_POST['cim']);
+    oci_bind_by_name($res, ':szdate', $_POST['szuldate']);
+
     oci_commit($connection->conn);
 
 }else{
@@ -39,8 +35,6 @@
         }
         echo "<div id=error>".$errorMessage."</div>";
     }
-
-
     }
-
+    //header("Location: http://localhost/Internetes_aruhaz/code/main.php");
 ?>

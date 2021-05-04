@@ -37,7 +37,7 @@
             <img class="card-img-top" src="profil.jpg" alt="Card image">
             <div class="card-body">
               <h4 class="card-title">Legjobb Felhasználó</h4>
-              <p class="card-text">Felhasználónév</p>
+              <p id="nev" class="card-text"><?php session_start(); echo $_SESSION["Felhnev"]?></p>
               <a href="#" class="btn btn-primary">Edit Profile</a>
             </div>
           </div>

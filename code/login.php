@@ -12,7 +12,7 @@ $query = "SELECT FelhNev, Jelszo FROM FELHASZNALO WHERE FelhNev = :username AND 
 $stid = oci_parse($con->getConnection(), $query);
 
 if (isset($_POST['Felhnev']) || isset($_POST['Jelszo'])){  
-    echo $query;         
+         
 $name = $_POST['Felhnev'];
 $pass=$_POST['Jelszo'];
 
