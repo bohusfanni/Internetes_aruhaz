@@ -141,16 +141,16 @@
             <div class="col">
            <?php 
            session_start();
-           if(isset($_SESSION['Felhanev'])){
+           if(isset($_SESSION['Felhanev'])){ // Rgazda
                echo "you logged in as: ", $_SESSION['Felhanev'], ", mint ", $_SESSION['Role'];
                echo "<br/><a href='logout.php'>logout</a>";
             } 
-            if(isset($_SESSION['Felhasznev'])){
+            if(isset($_SESSION['Felhasznev'])){ // Elado
                 echo "you logged in as: ", $_SESSION['Felhasznev'], ", mint ", $_SESSION['Role'];
                 echo "<br/><a href='logout.php'>logout</a>";
             } 
           
-           if(isset($_SESSION['Felhnev'])){
+           if(isset($_SESSION['Felhnev'])){ // Felhasznalo
                echo "you logged in as: ", $_SESSION['Felhnev'], ", mint ", $_SESSION['Role'];
                echo "<br/><a href='logout.php'>logout</a>";
             } 
@@ -191,6 +191,14 @@
 </div>
 <div class="container" id="linkek">
     <ul class="nav nav-tabs">
+        
+           <?php
+            if(isset($_SESSION['Felhanev'])){
+            echo "<li class='nav-item'>";
+            echo "<a class='nav-link active' href='#'>Eladó Létrehozás</a>";
+            echo "</li>";
+            }
+           ?> 
         <li class="nav-item">
           <a class="nav-link active" href="#">Élelmiszer</a>
         </li>
