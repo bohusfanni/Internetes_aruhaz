@@ -2,7 +2,7 @@
 
 class DBconnection{
     static $database_name = 'FANNI';
-    public $conn = null;
+    public static $conn = null;
     private static $instance = null;
 
     private function __construct(){
@@ -15,8 +15,13 @@ class DBconnection{
         }else {
             print "Connected to Oracle!";
         }
-        $this->conn = $connection;
+        self::$conn = $connection;
     }
+
+    public function getConnection(){
+        return self::$conn;
+    }
+
 
     public static function getInstance(){
         if(self::$instance==null){

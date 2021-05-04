@@ -17,7 +17,7 @@ if($returned_rows!=1){
     echo "Sikertelen bejelentkez�s";
 /* itt van valami baj : Parse error: syntax error, unexpected '{', expecting '(' in C:\xampp\htdocs\Internetes_aruhaz\code\login.php on line 19 */
 }else {
-    echo "�dv�zl�m ".$nev.", hamarosan �tir�ny�tom a f�oldalra";
+    echo "Üdvözlöm ".$nev.", hamarosan Átirinyítom a főoldalra";
     session_start();
     $_SESSION["fnev"]=$nev;
     $statement = $connection->parseQuery("SELECT Felhanev FROM Rgazda WHERE Felhanev='".$nev."'");
@@ -32,7 +32,7 @@ $count=0;
     if($count==1){
       $_SESSION["admin"]=true;
     }else{
-    echo "�dv�zl�m ".$nev.", hamarosan �tir�ny�tom a f�oldalra";
+    echo "�dv�zl�m ".$nev.", hamarosan átír�ny�tom a f�oldalra";
     session_start();
     $_SESSION["fnev"]=$nev;
     $statement = $connection->parseQuery("SELECT felhasznev FROM Elado WHERE felhasznev='".$nev."'");

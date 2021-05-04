@@ -133,18 +133,23 @@
 <body>
 <div class="container">
     <div class="row">
-
+  
         <div class="col">
             <img src="tecso.png" alt="logo" width="200">
         </div>
         <form>
             <div class="col">
+            <?php
+   session_start();
+   var_dump($_SESSION); ?>
                 <button onclick="document.getElementById('bejel').style.display='block'" type="button" class="btn btn-secondary" >Bejelentkezés</button>
+                <button type="button" class="btn btn-secondary" ><a href="admin_login.html">Admin Bejelentkezés</a></button>
                 <button type="button" class="btn btn-secondary" ><a href="registration.html">Regisztráció</a></button>
+                
             </div>
         </form>
+        <!--EZ ITT A LOGIN RÉSZ-->
         <div id="bejel" class="modal">
-// EZ ITT A LOGIN RÉSZ
             <form class="modal-content animate" action="login.php" method="POST">
                 <div class="container">
                     <label><b>Felhasználónév</b></label>
