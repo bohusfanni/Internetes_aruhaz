@@ -142,28 +142,38 @@
            <?php 
            session_start();
            if(isset($_SESSION['Felhanev'])){
-               echo "you logged in as </br>", $_SESSION['Felhanev'];
+               echo "you logged in as: ", $_SESSION['Felhanev'], ", mint ", $_SESSION['Role'];
                echo "<br/><a href='logout.php'>logout</a>";
-       } 
+            } 
+            if(isset($_SESSION['Felhasznev'])){
+                echo "you logged in as: ", $_SESSION['Felhasznev'], ", mint ", $_SESSION['Role'];
+                echo "<br/><a href='logout.php'>logout</a>";
+            } 
+          
+           if(isset($_SESSION['Felhnev'])){
+               echo "you logged in as: ", $_SESSION['Felhnev'], ", mint ", $_SESSION['Role'];
+               echo "<br/><a href='logout.php'>logout</a>";
+            } 
            
            ?>
                 <button onclick="document.getElementById('bejel').style.display='block'" type="button" class="btn btn-secondary" >Bejelentkezés</button>
                 <button type="button" class="btn btn-secondary" ><a href="admin_login.html">Admin Bejelentkezés</a></button>
+                <button type="button" class="btn btn-secondary" ><a href="elado_login.html">Elado Bejelentkezés</a></button>
                 <button type="button" class="btn btn-secondary" ><a href="registration.html">Regisztráció</a></button>
 
             </div>
         </form>
-        <!--EZ ITT A LOGIN RÉSZ-->
+<!--EZ ITT A LOGIN RÉSZ-->
         <div id="bejel" class="modal">
             <form class="modal-content animate" action="login.php" method="POST">
                 <div class="container">
                     <label><b>Felhasználónév</b></label>
-                    <input type="text" placeholder="Felhasználónév" name="uname" required>
+                    <input type="text" placeholder="Felhasználónév" name="Felhnev" required>
         
                     <label><b>Jelszó</b></label>
-                    <input type="password" placeholder="Jelszó" name="psw" required>
+                    <input type="password" placeholder="Jelszó" name="Jelszo" id="username" required>
         
-                    <button class="btn btn-secondary" type="submit" name="gomb">Bejelentkezés</button>
+                    <button class="btn btn-secondary" type="submit" name="gomb" id="password" >Bejelentkezés</button>
                     <label>
                         <input type="checkbox" checked="checked" name="remember"> Emlékezz rám
                     </label>

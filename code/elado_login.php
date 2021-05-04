@@ -7,13 +7,13 @@ $m = oci_error();
 echo $m['message'], "\n";
 }
 //error fuction returns an oracle message. 
-$query = "SELECT FelhaNev, Jelszo FROM RGAZDA WHERE FelhaNev = :username AND Jelszo = :pwd"; 
+$query = "SELECT FelhaszNev, Jelszo FROM ELADO WHERE FelhaszNev = :username AND Jelszo = :pwd"; 
 //query is sent to the db to fetch row id.
 $stid = oci_parse($con->getConnection(), $query);
 
-if (isset($_POST['Felhanev']) || isset($_POST['Jelszo'])){  
+if (isset($_POST['Felhasznev']) || isset($_POST['Jelszo'])){  
     echo $query;         
-$name = $_POST['Felhanev'];
+$name = $_POST['Felhasznev'];
 $pass = $_POST['Jelszo'];
 
 oci_bind_by_name($stid, ':username', $name);
@@ -26,8 +26,8 @@ $row = oci_fetch_array($stid, OCI_ASSOC);
 //oci_fetch_array returns a row from the db.
 
 if ($row = 1) {
-    $_SESSION["Felhanev"] = $_POST['Felhanev'];
-    $_SESSION["Role"] = "Admin";
+    $_SESSION["Felhasznev"] = $_POST['Felhasznev'];
+    $_SESSION["Role"] = "Elado";
 }
     else {
    echo("The person " . $name . " is not found .

@@ -1,49 +1,42 @@
+<?php session_start();?>
 <?php
-include "dbconn.php";
-
-session_start ();
-$connection = DBconnection::getInstance();
-$statement = $connection->select(array("Jelszo"), array("FELHASZNALO"), "FelhNev='".$_POST["uname"]."' AND Jelszo='".hash("MD5", $_POST["psw"])."'");
-$result = oci_execute($statement);
-$returned_rows = 0;
-$nev="";
-$row=array();
-
-while($row = oci_fetch_array($statement, OCI_ASSOC)){
-    $returned_rows++;
-    $nev=$row["NEV"];
+ include "dbconn.php";
+$con = DBconnection::getInstance();//connection string 
+if (!$con->getConnection()) {
+$m = oci_error();
+echo $m['message'], "\n";
 }
-if($returned_rows!=1){
-    echo "Sikertelen bejelentkez�s";
-/* itt van valami baj : Parse error: syntax error, unexpected '{', expecting '(' in C:\xampp\htdocs\Internetes_aruhaz\code\login.php on line 19 */
-}else {
-    echo "Üdvözlöm ".$nev.", hamarosan Átirinyítom a főoldalra";
-    session_start();
-    $_SESSION["fnev"]=$nev;
-    $statement = $connection->parseQuery("SELECT Felhanev FROM Rgazda WHERE Felhanev='".$nev."'");
-    $result = oci_execute($statement);
-    $count=0;
-    while(oci_fetch_array($statement, OCI_ASSOC)){
-        $count++;
-        echo "ADMIN!";
-    }
+//error fuction returns an oracle message. 
+$query = "SELECT FelhNev, Jelszo FROM FELHASZNALO WHERE FelhNev = :username AND Jelszo = :pwd"; 
+//query is sent to the db to fetch row id.
+$stid = oci_parse($con->getConnection(), $query);
+
+if (isset($_POST['Felhnev']) || isset($_POST['Jelszo'])){  
+    echo $query;         
+$name = $_POST['Felhnev'];
+$pass=$_POST['Jelszo'];
+
+oci_bind_by_name($stid, ':username', $name);
+oci_bind_by_name($stid, ':pwd', $pass);
+
+oci_execute($stid);
+
+$row = oci_fetch_array($stid, OCI_ASSOC);
+echo $row;
 }
-$count=0;
-    if($count==1){
-      $_SESSION["admin"]=true;
-    }else{
-    echo "�dv�zl�m ".$nev.", hamarosan átír�ny�tom a f�oldalra";
-    session_start();
-    $_SESSION["fnev"]=$nev;
-    $statement = $connection->parseQuery("SELECT felhasznev FROM Elado WHERE felhasznev='".$nev."'");
-    $result = oci_execute($statement);
-    $count=0;
-    while(oci_fetch_array($statement, OCI_ASSOC)){
-        $count++;
-        echo "Elado!";
-    }
-    if($count==1){
-  $_SESSION["elado"]=true;
-    }
-  }
-?>
+//oci_fetch_array returns a row from the db.
+
+if($row) {
+    $_SESSION["Felhnev"] = $_POST['Felhnev'];
+    $_SESSION["Role"] = "Felhasználo";
+}
+    else {
+   echo("The person " . $name . " is not found .
+   Please check the spelling and try again or check password");
+   exit;
+   } 
+   oci_free_statement($stid);
+   oci_close($con->getConnection());
+   header("Location: http://localhost/Internetes_aruhaz/code/main.php");
+   //header function locates you to a welcome page saved s wel.php
+    ?>
