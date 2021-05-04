@@ -25,9 +25,8 @@ $row = oci_fetch_array($stid, OCI_ASSOC);
 }
 //oci_fetch_array returns a row from the db.
 
-if ($row = 1) {
+if ($row) {
     $_SESSION["Felhanev"] = $_POST['Felhanev'];
-    var_dump($_SESSION);
     echo $_POST['Felhanev'];
 }
     else {
@@ -37,6 +36,6 @@ if ($row = 1) {
    } 
    oci_free_statement($stid);
    oci_close($con->getConnection());
-   //header("Location: http://localhost/Internetes_aruhaz/code/main.php");
+   header("Location: http://localhost/Internetes_aruhaz/code/main.php");
    //header function locates you to a welcome page saved s wel.php
     ?>

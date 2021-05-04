@@ -139,13 +139,18 @@
         </div>
         <form>
             <div class="col">
-            <?php
-   session_start();
-   var_dump($_SESSION); ?>
+           <?php 
+           session_start();
+           if(isset($_SESSION['Felhanev'])){
+               echo "you logged in as </br>", $_SESSION['Felhanev'];
+               echo "<br/><a href='logout.php'>logout</a>";
+       } 
+           
+           ?>
                 <button onclick="document.getElementById('bejel').style.display='block'" type="button" class="btn btn-secondary" >Bejelentkezés</button>
                 <button type="button" class="btn btn-secondary" ><a href="admin_login.html">Admin Bejelentkezés</a></button>
                 <button type="button" class="btn btn-secondary" ><a href="registration.html">Regisztráció</a></button>
-                
+
             </div>
         </form>
         <!--EZ ITT A LOGIN RÉSZ-->
