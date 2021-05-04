@@ -28,3 +28,11 @@ Szerep-funkció mátrix: KÉSZ
 
 2-es szintű AFD: Tomi kész 
 
+2021.05.04 Feladatok
+
+Termékek felvitele Eladó által
+Admin bejel után csak egy űrlap ahol felvihet eladókat
+
+
+
+

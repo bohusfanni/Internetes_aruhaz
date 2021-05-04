@@ -14,7 +14,7 @@ $stid = oci_parse($con->getConnection(), $query);
 if (isset($_POST['Felhanev']) || isset($_POST['Jelszo'])){  
     echo $query;         
 $name = $_POST['Felhanev'];
-$pass=$_POST['Jelszo'];
+$pass = $_POST['Jelszo'];
 
 oci_bind_by_name($stid, ':username', $name);
 oci_bind_by_name($stid, ':pwd', $pass);
@@ -25,8 +25,9 @@ $row = oci_fetch_array($stid, OCI_ASSOC);
 }
 //oci_fetch_array returns a row from the db.
 
-if ($row) {
+if ($row = 1) {
     $_SESSION["Felhanev"] = $_POST['Felhanev'];
+    var_dump($_SESSION);
     echo $_POST['Felhanev'];
 }
     else {
@@ -36,6 +37,6 @@ if ($row) {
    } 
    oci_free_statement($stid);
    oci_close($con->getConnection());
-   header("Location: http://localhost/Internetes_aruhaz/code/main.php");
+   //header("Location: http://localhost/Internetes_aruhaz/code/main.php");
    //header function locates you to a welcome page saved s wel.php
     ?>
