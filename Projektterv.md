@@ -33,6 +33,10 @@ Szerep-funkció mátrix: KÉSZ
 Termékek felvitele Eladó által
 Admin bejel után csak egy űrlap ahol felvihet eladókat
 
+felhasználó - profil
+termék felviteli űrlap
+
+
 
 
 
