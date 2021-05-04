@@ -1,7 +1,7 @@
 <?php
 
 class DBconnection{
-    static $database_name = 'FANNI';
+    static $database_name = 'oracle kopanecz';
     public static $conn = null;
     private static $instance = null;
 

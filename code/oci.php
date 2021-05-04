@@ -5,7 +5,7 @@ if (!$conn) {
 	$e = oci_error();
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-
++
 print ("Elado tabla");
 $stid = oci_parse($conn, 'SELECT * FROM elado');
 if(!$stid) {
