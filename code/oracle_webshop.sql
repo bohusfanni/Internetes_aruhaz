@@ -17,7 +17,7 @@ create table KATEGORIA(
 
 create table ELADO(
  FelhaszNev VARCHAR(20) PRIMARY KEY NOT NULL,
- Jelszo VARCHAR(21) NOT NULL
+ Jelszo VARCHAR(200) NOT NULL
 );
 
 create table RGAZDA(

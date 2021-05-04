@@ -23,6 +23,7 @@
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-secondary"><a href="main.php">Vissza a Főoldalra</a></button>
+            <button type="button" class="btn btn-secondary"><a href="logout.php">Kijelentkezés</a></button>
         </div>
 
     </div>

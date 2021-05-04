@@ -216,7 +216,7 @@
                 }
                 if(isset($_SESSION['Felhasznev'])){
                     echo "<li class='nav-item'>";
-                    echo "<a class='nav-link' href=''>Termék macera</a>";
+                    echo "<a class='nav-link' href='add.php'>Termék macera</a>";
                     echo "</li>";
                     }
         ?> 
