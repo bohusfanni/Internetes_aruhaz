@@ -234,148 +234,40 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th class="font-weight-light"></th>
-                    </tr>
-                </thead>
-                <tbody class="table-borderless">
-                    <tr>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                    </tr>
-                    </thead>
-                <tbody class="table-borderless">
-                    <tr>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody class="table-borderless">
-                    <tr>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-4">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th></th>
-                        </tr>
-                    </thead>
-                <tbody class="table-borderless">
-                        <tr>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                        </tr>
-                </tbody>
-                </table>
-                <table class="table">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                    </tr>
-                    </thead>
-                <tbody class="table-borderless">
-                    <tr>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody class="table-borderless">
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-4">
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody class="table-borderless">
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                </tr>
-                </tbody>
-            </table>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody class="table-borderless">
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                </tr>
-                </tbody>
-            </table>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody class="table-borderless">
-                <tr>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<?php
+   include "dbconn.php";
+   $conn = DBconnection::getInstance();
+
+        $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Kategoria FROM termek');
+if(!$stid2) {
+	$e = oci_error($conn->getConnection(), $query);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+$r = oci_execute($stid2);
+if(!$r){
+	$e = oci_error($stid2);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+$i = 0;
+while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
+    
+    print "<table border = '2'>\n" ;
+	print "<table border='1'>\n";	
+	//print "<tr>";
+    foreach ($row as $item) {
+        print "<tr><th>" . $item . "</th></tr>" ;
+    }  
+	//print "</tr>";
+	print "</table>\n";
+	print "<div class='form-group'>";
+	print "<label for='amount'>Darabszám</label>";
+	print "<input type='number' name='amount' class='form-control' id='amount' placeholder='Darabszám'>";
+	print "<input type='submit' class='btn btn-outline-dark' value='Kosárba'></input>";
+    print "</div><br>";
+    print "</table>\n";
+}
+oci_free_statement($stid2);
+?>
   
 <script>
 

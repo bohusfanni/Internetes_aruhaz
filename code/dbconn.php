@@ -13,7 +13,7 @@ class DBconnection{
             echo $m['message'], "\n";
             exit;
         }else {
-            print "Connected to Oracle!";
+            //print "Connected to Oracle!";
         }
         self::$conn = $connection;
     }
