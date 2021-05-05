@@ -234,11 +234,12 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
+        <script src="order.js"></script>
 <?php
    include "dbconn.php";
    $conn = DBconnection::getInstance();
 
-        $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Kategoria FROM termek');
+        $stid2 = oci_parse($conn->getConnection(), 'SELECT TermekKod, Nev, Ar, Kategoria FROM termek');
 if(!$stid2) {
 	$e = oci_error($conn->getConnection(), $query);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -250,7 +251,7 @@ if(!$r){
 }
 
 while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
-
+    
     //print "<table border = '2'>\n" ;
 	print "<table border='1'>\n";	
 	//print "<tr>";
@@ -258,14 +259,16 @@ while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
 
         print "<tr><th>" . $item . "</th></tr>" ;
     }
+    $termekkod = $row['TERMEKKOD'];
 	//print "</tr>";
 	print "</table>\n";
 	print "<div class='form-group'>";
 	print "<label for='amount'>Darabszám</label>";
-	print "<input type='number' name='amount' class='form-control' id='amount' placeholder='Darabszám'>";
-    print "<form method='post'action='additem.php'>";
-	print "<input type='submit' class='btn btn-outline-dark' value='Kosárba' onclick></input>";
-    print "</form>";
+	print "<input type='number' name='amount' class='form-control' id='$termekkod' placeholder='Darabszám'>";
+    var_dump($_COOKIE);
+    
+	print "<button class='btnAddAction' value='Kosárba' onclick ='insert($termekkod)' ></button>";
+    
     print "</div><br>";
     //print "</table>\n";
 }
