@@ -88,7 +88,6 @@ while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	print "<input type='number' name='amount' class='form-control' id='amount' placeholder='Darabszám'>";
 	print "<input type='submit' class='btn btn-outline-dark' value='Kosárba'></input>";
     print "</div><br>";
-	
 }
 oci_free_statement($stid2);
 
