@@ -5,28 +5,53 @@ if (!$conn) {
 	$e = oci_error();
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-+
+
+			/*<table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="font-weight-light"></th>
+                    </tr>
+                </thead>
+                <tbody class="table-borderless">
+                    <tr>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </tbody>
+            </table>
+*/
+
 print ("Elado tabla");
-$stid = oci_parse($conn, 'SELECT * FROM elado');
-if(!$stid) {
+$fej = oci_parse($conn, 'SELECT FelhaszNev FROM elado');
+$test = oci_parse($conn, 'SELECT Jelszo FROM elado');
+if(!$fej || !$test) {
 	$e = oci_error($conn);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-$r = oci_execute($stid);
-if(!$r){
+$r = oci_execute($fej);
+$t = oci_execute($test);
+if(!$r || !$t){
 	$e = oci_error($stid);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-print "<table border='1'>\n";
-while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
-	print "<tr>\n";
+print "<table class='table' border = '1'>\n";
+while($row = oci_fetch_array($fej, OCI_ASSOC+OCI_RETURN_NULLS)) {
+	print "<thead><tr>\n";
     foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>";
     }
-    print "</tr>\n";
+    print "</tr></thead>\n";
 }
 print "</table><br>\n";
-oci_free_statement($stid);
+oci_free_statement($r, $t);
+
+
+
+
+
+
 
 
 print ("felhasznalo tabla");

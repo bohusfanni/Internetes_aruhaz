@@ -17,7 +17,6 @@ session_start();
      
     $query = "INSERT INTO TERMEK(TermekKod, Ar, nev, Leiras, DarabSzam, Kategoria) VALUES (:itemid, :price, :itemname, :what, :amount, :cat)";
 
-    
     $res = oci_parse($connection->getConnection(), $query);
 
     oci_bind_by_name($res, ':itemid', $itemid);
