@@ -248,24 +248,28 @@ if(!$r){
 	$e = oci_error($stid2);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-$i = 0;
+
 while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
-    
-    print "<table border = '2'>\n" ;
+
+    //print "<table border = '2'>\n" ;
 	print "<table border='1'>\n";	
 	//print "<tr>";
     foreach ($row as $item) {
+
         print "<tr><th>" . $item . "</th></tr>" ;
-    }  
+    }
 	//print "</tr>";
 	print "</table>\n";
 	print "<div class='form-group'>";
 	print "<label for='amount'>Darabszám</label>";
 	print "<input type='number' name='amount' class='form-control' id='amount' placeholder='Darabszám'>";
-	print "<input type='submit' class='btn btn-outline-dark' value='Kosárba'></input>";
+    print "<form method='post'action='additem.php'>";
+	print "<input type='submit' class='btn btn-outline-dark' value='Kosárba' onclick></input>";
+    print "</form>";
     print "</div><br>";
-    print "</table>\n";
+    //print "</table>\n";
 }
+
 oci_free_statement($stid2);
 ?>
   

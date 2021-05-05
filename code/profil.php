@@ -40,8 +40,10 @@
               <p id="nev" class="card-text"><?php session_start(); echo $_SESSION["Felhnev"]?></p>
               <a href="#" class="btn btn-primary"id="gomb"onclick="myFunction">Edit Profile</a>
               <script>
+document.getElementById("gomb").addEventListener("click", myFunction);
+
 function myFunction() {
-  document.getElementByid("gomb").innerHTML = "YOU CLICKED ME!";
+  document.getElementById("gomb").innerHTML = "YOU CLICKED ME!";
 }
 </script>
             </div>
