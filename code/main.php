@@ -239,7 +239,7 @@
    include "dbconn.php";
    $conn = DBconnection::getInstance();
 
-        $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Kategoria, Darabszam FROM termek');
+        $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek');
 if(!$stid2) {
 	$e = oci_error($conn->getConnection(), $query);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -253,23 +253,27 @@ if(!$r){
 while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
     
     //print "<table border = '2'>\n" ;
-	print "<table border='1'>\n";	
+	print "<table border='1'>\n";
+    
 	//print "<tr>";
     foreach ($row as $item) {
 
         print "<tr><th>" . $item . "</th></tr>" ;
     }
-    //$termekkod = $row['TERMEKKOD'];
+    //print "$row[NEV]";
+    print "<form method='POST' action='order.php' accept-charset='utf-8'>";
 	//print "</tr>";
 	print "</table>\n";
 	print "<div class='form-group'>";
 	print "<label for='amount'>Darabszám</label>";
-	print "<input type='number' name='amount' class='form-control' id='$termekkod' placeholder='Darabszám'>";
+	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám'>";
+    print "<input type='hidden' name='name' value='$row[NEV]'/>";
+    print "<input type='hidden' name='ar' value='$row[AR]'/>";
     
-    
-	print "<button class='btnAddAction' value='Kosárba' onclick ='insert($termekkod)' placeholder='Megrendel' ></button>";
+	print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
     //var_dump($_COOKIE);
     print "</div><br>";
+    print "</form>";
     //print "</table>\n";
 }
 

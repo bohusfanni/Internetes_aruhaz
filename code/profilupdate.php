@@ -4,7 +4,7 @@ session_start();
    $connection = DBconnection::getInstance();
 
    if(isset($_REQUEST['uname'])){ 
-       echo"itt jó";
+       echo"itt jï¿½";
     $name = $_POST['uname'];
     $password = $_POST['pwd'];
     
@@ -16,7 +16,7 @@ session_start();
     
     $password = password_hash($password,PASSWORD_BCRYPT);
      
-    $query = "UPDATE FELHASZNALO(FelhNev, Jelszo, Nev, Lakcim, Szuldatum, Email) VALUES (:name, :password, :nev, :cim, TO_DATE(:szdate,'YYYY MM DD'),:email)";
+    $query = "UPDATE FELHASZNALO(FelhNev, Jelszo, Nev, Lakcim, Szuldatum, Email) VALUES (:name, :password, :nev, :cim, TO_DATE(:szdate,'YYYY MM DD'),:email) WHERE FelhNev = $_SESSION['Felhnev']";
     
     $res = oci_parse($connection->getConnection(), $query);
 
@@ -31,7 +31,7 @@ session_start();
         var_dump(oci_error($res));
     }else{
         //oci_commit($connection->getConnection());
-        echo "Sikeres adatmodósítás!!! :D";
+        echo "Sikeres adatmodï¿½sï¿½tï¿½s!!! :D";
        // header("Location: http://localhost/Internetes_aruhaz/code/main.php");
 
 
