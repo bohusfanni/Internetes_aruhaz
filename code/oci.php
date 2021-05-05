@@ -36,16 +36,25 @@ if(!$r || !$t){
 	$e = oci_error($stid);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
+
 print "<table class='table' border = '1'>\n";
+print "<tr>";
 while($row = oci_fetch_array($fej, OCI_ASSOC+OCI_RETURN_NULLS)) {
-	print "<thead><tr>\n";
-    foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>";
+    	foreach ($row as $item) {
+        print "<th>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</th>";
     }
-    print "</tr></thead>\n";
 }
+print "</tr>";
+print "<tr>";
+while($row2 = oci_fetch_array($test, OCI_ASSOC+OCI_RETURN_NULLS)) {
+	foreach ($row2 as $item) {
+        print "<td>" . $item . "</td>";
+	}
+}
+print "</tr>";
 print "</table><br>\n";
-oci_free_statement($r, $t);
+oci_free_statement($fej);
+oci_free_statement($test);
 
 
 
@@ -56,7 +65,7 @@ oci_free_statement($r, $t);
 
 print ("felhasznalo tabla");
 
-$stid2 = oci_parse($conn, 'SELECT szuldatum FROM felhasznalo');
+$stid2 = oci_parse($conn, 'SELECT Nev, Ar, Kategoria FROM termek');
 if(!$stid2) {
 	$e = oci_error($conn);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -66,16 +75,26 @@ if(!$r){
 	$e = oci_error($stid2);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-print "<table border='1'>\n";
 while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
-	print "<tr>\n";
+	print "<table border='1'>\n";	
+	//print "<tr>";
     foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-    }
-    print "</tr>\n";
+        print "<tr><th>" . $item . "</th></tr>" ;
+    }  
+	//print "</tr>";
+	print "</table>\n";
+	print "<div class='form-group'>";
+	print "<label for='amount'>Darabszám</label>";
+	print "<input type='number' name='amount' class='form-control' id='amount' placeholder='Darabszám'>";
+	print "<input type='submit' class='btn btn-outline-dark' value='Kosárba'></input>";
+    print "</div><br>";
+	
 }
-print "</table><br> \n";
 oci_free_statement($stid2);
+
+
+
+
 
 
 print ("Kategoria tabla");
@@ -89,15 +108,17 @@ if(!$r){
 	$e = oci_error($stid);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-print "<table border='1'>\n";
+
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+	print "<table border='1'>\n";
 	print "<tr>\n";
     foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        print "<th>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</th>\n";
     }
     print "</tr>\n";
+	print "</table><br>\n";
 }
-print "</table><br>\n";
+
 oci_free_statement($stid);
 
 
@@ -116,7 +137,7 @@ print "<table border='1'>\n";
 while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	print "<tr>\n";
     foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        print "<tr><th>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</th></tr>\n";
     }
     print "</tr>\n";
 }
