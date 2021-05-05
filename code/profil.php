@@ -112,14 +112,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
               <button class="open-button" onclick="openForm()">Profil szerkesztése</button>
 
 <div class="form-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form action="profilupdate.php" class="form-container">
     <h1>Login</h1>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Adja meg az új email címét" name="email" >
 
-    <label for="psw"><b>Jelszó</b></label>
-    <input type="password" placeholder="Adja meg az új jelszavát" name="psw" >
+    <label for="pwd"><b>Jelszó</b></label>
+    <input type="password" placeholder="Adja meg az új jelszavát" name="pwd" >
     <label for="name"><b>Név</b></label>
     <input type="text" placeholder="Adja meg az új nevét" name="name" >
 
