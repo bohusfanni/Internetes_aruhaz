@@ -38,10 +38,10 @@
             <div class="card-body">
               <h4 class="card-title">Legjobb Felhasználó</h4>
               <p id="nev" class="card-text"><?php session_start(); echo $_SESSION["Felhnev"]?></p>
-              <a href="#" class="btn btn-primary"onclick="myFunction">Edit Profile</a>
+              <a href="#" class="btn btn-primary"id="gomb"onclick="myFunction">Edit Profile</a>
               <script>
 function myFunction() {
-  document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+  document.getElementByid("gomb").innerHTML = "YOU CLICKED ME!";
 }
 </script>
             </div>
