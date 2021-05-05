@@ -12,99 +12,77 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <style>
-  input[type=text], input[type=password],input[type=email] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
-        }
-        .container {
-            padding: 16px;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
 
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
+.open-button {
+  background-color: Blue;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
 
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto;
-            border: 1px solid #888;
-            width: 80%;
-        }
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
 
 
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: red;
-            border-color: red;
-            cursor: pointer;
-        }
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
 
 
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-            from {-webkit-transform: scale(0)}
-            to {-webkit-transform: scale(1)}
-        }
-
-        @keyframes animatezoom {
-            from {transform: scale(0)}
-            to {transform: scale(1)}
-        }
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
 
 
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-            .cancelbtn {
-                width: 100%;
-            }
-        }
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+
+.form-container .cancel {
+  background-color: Red;
+}
+
+
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+  
 </style>
 <body>
 <div class="container">
@@ -130,18 +108,48 @@
             <div class="card-body">
               <h4 class="card-title">Legjobb Felhasználó</h4>
               <p id="nev" class="card-text"><?php session_start(); echo $_SESSION["Felhnev"]?></p>
-              <button onclick="document.getElementById('bejel').style.display='block'" type="button" class="btn btn-secondary" >Edit profil</button>
+              
+              <button class="open-button" onclick="openForm()">Profil szerkesztése</button>
+
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Adja meg az új email címét" name="email" >
+
+    <label for="psw"><b>Jelszó</b></label>
+    <input type="password" placeholder="Adja meg az új jelszavát" name="psw" >
+    <label for="name"><b>Név</b></label>
+    <input type="text" placeholder="Adja meg az új nevét" name="name" >
+
+    <label for="uname"><b>Felhasználónév</b></label>
+    <input type="text" placeholder="Adja meg az új Felhasználónevét" name="uname" >
+    <label for="szuldate"><b>Születési év</b></label>
+    <input type="date" placeholder="Adja meg az új születési évét" name="szuldate" >
+
+    <label for="cim"><b>Lakcím</b></label>
+    <input type="text" placeholder="Adja meg az új lakcímét" name="cim" ><label for="email"><b>Email</b></label>
+
+
+   
+
+    <button type="submit" class="btn">Frissít</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Mégse</button>
+  </form>
+</div>
               <script>
+               function openForm() {
+                 document.getElementById("myForm").style.display = "block";
+                    }
 
-    var modal = document.getElementById('bejel');
+                    function closeForm() {
+                         document.getElementById("myForm").style.display = "none";
+                                          }
+              </script>
+     
+              
 
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
             </div>
           </div>
 
