@@ -103,12 +103,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
    $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
    $parsed=oci_parse($conn,$querry);
    oci_bind_by_name($parsed,"felh",$_SESSION['FelhNev']);
-   $email= $row['Email'];
-   $pwd= $row['Jelszo'];
-   $name= $row['Nev'];
-   $uname= $row['FelhNev'];
-   $szdate= $row['SzulDate'];
-   $cim= $row['Lakcim'];
+   if(oci_execute($parsed)){
+    while()$row=oci_feth_array($parsed){
+        $email= $row['Email'];
+        $pwd= $row['Jelszo'];
+        $name= $row['Nev'];
+        $uname= $row['FelhNev'];
+        $szdate= $row['SzulDate'];
+        $cim= $row['Lakcim'];
+        }
+   }
     
    ?>
 
