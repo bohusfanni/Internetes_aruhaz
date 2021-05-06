@@ -36,12 +36,16 @@
 <div class="container" style="padding-top: 1cm;">
         <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Profil</h1>
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
-        <div class="card" style="width:300px" style="align-items: center;">
-            <img class="card-img-top" src="profil.jpg" alt="Card image">
-            <div class="card-body">
-              <h4 class="card-title">Legjobb Felhasználó</h4>
-              <p id="nev" class="card-text"><?php session_start(); echo "Bejelentkezve: " . $_SESSION["Felhnev"]?></p>
+        <div class="col-3">
+            <div class="card" style="width:300px" style="align-items: center;">
+                <img class="card-img-top" src="profil.jpg" alt="Card image">
+                <div class="card-body">
+                <h4 class="card-title">Legjobb Felhasználó</h4>
+                <p id="nev" class="card-text"><?php session_start(); echo "Bejelentkezve: " . $_SESSION["Felhnev"]?></p>
+                </div>
             </div>
+        </div>
+        
 <form method="POST" action="profilupdate.php">
 <?php 
 
@@ -78,10 +82,35 @@
    ?>
    <input type='submit' name="changeuser" value="Adatok módosítása">
    </form>
-          </div>
+    </div>
+    <div class="col-3">
+    <form method="POST" action="profilupdate.php">
+        <?php
+$stid = oci_parse($conn->getConnection(), "SELECT * FROM rendel WHERE FelhNev=:felhnev");
 
-</div>
-      
-
+oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
+if(!$stid) {
+	$e = oci_error($conn);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+$r = oci_execute($stid);
+if(!$r){
+	$e = oci_error($stid);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+print "<table border='1'>\n";
+while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+	print "<tr>\n";
+    foreach ($row as $item) {
+        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+    }
+    print "</tr>\n";
+}
+print "</table><br>\n";
+oci_free_statement($stid);
+?>
+ <input type='submit' name="finifh" value="Megrendel">
+</form>
+        </div>
 </body>
 </html>

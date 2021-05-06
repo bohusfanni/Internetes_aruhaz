@@ -30,6 +30,23 @@
 
 </div>
 
+<?php
+   include "dbconn.php";
+   $conn = DBconnection::getInstance();
+
+        $stid2 = oci_parse($conn->getConnection(), 'SELECT * FROM kategoria');
+if(!$stid2) {
+	$e = oci_error($conn->getConnection(), $query);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+$r = oci_execute($stid2);
+if(!$r){
+	$e = oci_error($stid2);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+
+
+?>
 
 <div class="container" style="padding-top: 1cm;">
         <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Termék felvitele</h1>
@@ -57,8 +74,17 @@
         <input type="number" name="amount" class="form-control" id="amount" placeholder="Darabszám">
     </div>
     <div class="form-group">
-        <label for="cat">Kategória</label>
-        <input type="text" name="cat" class="form-control" id="cat" placeholder="Kategória">
+        <label for="cat">Kategória</label><br>
+        <?php
+        echo "<select name='cat'>";
+        while($row = oci_fetch_array($stid2)) 
+        {
+            echo "'<option name='cat' id='cat'> $row[KATEGORIA] </option>'";
+        }
+        echo "</select>";
+        oci_free_statement($stid2);
+        ?>
+        
     </div>
     <div class="text-center">
         <input type="submit" class="btn btn-outline-dark" value="Mentés"></input>

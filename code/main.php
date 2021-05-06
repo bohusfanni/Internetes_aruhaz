@@ -143,11 +143,11 @@
            session_start();
            if(isset($_SESSION['Felhanev'])){ // Rgazda
                echo "you logged in as: ", $_SESSION['Felhanev'], ", mint ", $_SESSION['Role'];
-               echo "<br/><a href='logout.php'>logout</a>";
+               echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
             } 
             if(isset($_SESSION['Felhasznev'])){ // Elado
                 echo "you logged in as: ", $_SESSION['Felhasznev'], ", mint ", $_SESSION['Role'];
-                echo "<br/><a href='logout.php'>logout</a>";
+                echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
             } 
           
            if(isset($_SESSION['Felhnev'])){ // Felhasznalo
@@ -241,7 +241,7 @@
    include "dbconn.php";
    $conn = DBconnection::getInstance();
 
-        $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek');
+    $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek');
 if(!$stid2) {
 	$e = oci_error($conn->getConnection(), $query);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -256,7 +256,7 @@ while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	print "<table border='1'>\n";
     print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
     print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
-    print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . "</th></tr>" ;
+    print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . " Db" . "</th></tr>" ;
 
     if(isset($_SESSION['Felhnev'])){
     print "<form method='POST' action='order.php' accept-charset='utf-8'>";

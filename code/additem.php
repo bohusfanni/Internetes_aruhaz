@@ -2,7 +2,7 @@
 session_start();
    include "dbconn.php";
    $connection = DBconnection::getInstance();
-   
+   var_dump($_POST);
    if(isset($_POST['itemid'])){ 
 
        echo"az if j�";
@@ -12,7 +12,6 @@ session_start();
     $itemname = $_POST['itemname'];
     $what = $_POST['what'];
     $amount = $_POST['amount'];
-
     $cat = $_POST['cat'];   
      
     $query = "INSERT INTO TERMEK(TermekKod, Ar, nev, Leiras, DarabSzam, Kategoria) VALUES (:itemid, :price, :itemname, :what, :amount, :cat)";
