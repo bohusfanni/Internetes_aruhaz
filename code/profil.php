@@ -113,7 +113,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div class="form-popup" id="myForm">
   <form action="profilupdate.php" class="form-container">
-    <h1>Login</h1>
+    <h1>Szerkesztés</h1>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Adja meg az új email címét" name="email" >
