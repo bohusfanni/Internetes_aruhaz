@@ -157,8 +157,7 @@
            ?>
             <button onclick="document.getElementById('bejel').style.display='block'" type='button' class='btn btn-secondary' >Bejelentkezés</button>
             <?php
-            if(!isset($_SESSION['Felhnev']) || !isset($_SESSION['Felhasznev']) || !isset($_SESSION['Felhanev'])){
-                print "";
+            if(!isset($_SESSION['Felhnev']) && !isset($_SESSION['Felhasznev']) && !isset($_SESSION['Felhanev'])){
                 echo "<button type='button' class='btn btn-secondary' ><a href='admin_login.html'>Admin Bejelentkezés</a></button>";
                 echo "<button type='button' class='btn btn-secondary' ><a href='elado_login.html'>Elado Bejelentkezés</a></button>";
                 echo "<button type='button' class='btn btn-secondary' ><a href='registration.html'>Regisztráció</a></button>";
