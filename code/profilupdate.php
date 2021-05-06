@@ -3,27 +3,27 @@ session_start();
 include "dbconn.php";
    $conn = DBconnection::getInstance();
 
-        $email= $POST['EMAIL'];
-        $pwd= $POST['JELSZO'];
-        $name= $POST['NEV'];
-        $uname= $POST['FELHNEV'];
-        $szdate= $POST['SZULDATUM'];
-        $cim= $POST['LAKCIM'];
+        $email= $_POST['mail'];
+        $pwd= $_POST['Jelszo'];
+        $rname= $_POST['name'];
+        //$uname= $_POST['uname'];
+        $szdate= $_POST['szdate'];
+        $cim= $_POST['cim'];
+        var_dump($_POST);
 
-    $query = "UPDATE FELHASZNALO SET FELHNEV=:uname, EMAIL=:email , SZULDATE=:szdate,LAKCIM=:cim,JELSZO=:pwd WHERE EMAIL=:email";
-    $query = oci_parse($connection,$query);
-    oci_bind_by_name($query,":felhnev",$uname);
-    oci_bind_by_name($query,":jelszo",$pwd);
-    oci_bind_by_name($query,":nev",$name);
-    oci_bind_by_name($query,":lakcim",$cim);
-    oci_bind_by_name($query,":email",$email);
+    $query = "UPDATE FELHASZNALO SET NEV=:rname, EMAIL=:email , SZULDATUM=:szdate,LAKCIM=:cim,JELSZO=:pwd WHERE EMAIL=:email";
+    $res = oci_parse($conn->getConnection(),$query);
+    //oci_bind_by_name($res,":uname",$uname);
+    oci_bind_by_name($res,":pwd",$pwd);
+    oci_bind_by_name($res,":rname",$rname);
+    oci_bind_by_name($res,":cim",$cim);
+    oci_bind_by_name($res,":szdate",$szdate);
+    oci_bind_by_name($res,":email",$email);
 
-    if(oci_execute($query)){
-        header('Location: /php/profil.php?id='.$email);
-        return;
+    if(oci_execute($res)===false){
+        var_dump(oci_error($res));
+    }else{
+        //oci_commit($connection->getConnection());
+        echo "Sikeres felvitel";
+        header("Location: http://localhost/Internetes_aruhaz/code/profil.php");
     }
-    echo "Valami hiba lehet";
-    var_dump($_POST);
-}else{
-    header("Location: /php/login.php");
-}

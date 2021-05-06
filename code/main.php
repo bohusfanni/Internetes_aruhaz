@@ -155,7 +155,7 @@
                echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
             } 
            ?>
-            <button onclick="document.getElementById('bejel').style.display='block'" type='button' class='btn btn-secondary' >Bejelentkezés</button>
+            <button onclick="document.getElementById('bejel').style.display='block'" type='button' class='btn btn-secondary'>Bejelentkezés</button>
             <?php
             if(!isset($_SESSION['Felhnev']) && !isset($_SESSION['Felhasznev']) && !isset($_SESSION['Felhanev'])){
                 echo "<button type='button' class='btn btn-secondary' ><a href='admin_login.html'>Admin Bejelentkezés</a></button>";

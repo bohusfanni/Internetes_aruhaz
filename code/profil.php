@@ -42,7 +42,7 @@
               <h4 class="card-title">Legjobb Felhasználó</h4>
               <p id="nev" class="card-text"><?php session_start(); echo "Bejelentkezve: " . $_SESSION["Felhnev"]?></p>
             </div>
-<form method="post" action="profilupdate.php">
+<form method="POST" action="profilupdate.php">
 <?php 
 
      include "dbconn.php";
@@ -60,19 +60,19 @@
         $cim= $row['LAKCIM'];
 
                 echo '<label for="mail">Email: </label>';
-                echo "<input type='text' id='mail'  value='$email'><br>";
+                echo "<input type='text' name='mail'  value='$email'><br>";
                 echo '<label for="fistname">Jelszo: </label>';
-                echo "<input type='text' id='Jelszo' value='$pwd' ><br>";
+                echo "<input type='text' name='Jelszo' value='$pwd' ><br>";
                 echo '<label for="lastname">Név: </label>';
-                echo "<input type='text' id='name' value='$name'  ><br>";
+                echo "<input type='text' name='name' value='$name'  ><br>";
                 echo  '<label for="bdate">Felhasznalo Név: </label>';
-                echo "<input type='text' id='uname' value='$uname' ><br>";
+                echo "<input type='text' name='uname' value='$uname' disabled><br>";
 
                 echo ' <label for="country">Születési dátum:  </label>';
-                echo "<input type='text' id='szdate' value='$szdate' ><br>";
+                echo "<input type='text' name='szdate' value='$szdate' ><br>";
 
                 echo '<label for="postcode">Lakcím: </label>';
-                echo  "<input type='text' id='cim' name='postcode' value='$cim' required><br>";
+                echo  "<input type='text' id='cim' name='cim' value='$cim'><br>";
     }
   }  
    ?>
