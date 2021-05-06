@@ -251,30 +251,24 @@ if(!$r){
 }
 
 while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
-    
-    //print "<table border = '2'>\n" ;
 	print "<table border='1'>\n";
-    
-	//print "<tr>";
-    foreach ($row as $item) {
+    print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
+    print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
+    print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . "</th></tr>" ;
 
-        print "<tr><th>" . $item . "</th></tr>" ;
-    }
-    //print "$row[NEV]";
+    if(isset($_SESSION['Felhnev'])){
     print "<form method='POST' action='order.php' accept-charset='utf-8'>";
-	//print "</tr>";
 	print "</table>\n";
 	print "<div class='form-group'>";
 	print "<label for='amount'>Darabszám</label>";
 	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám'>";
     print "<input type='hidden' name='name' value='$row[NEV]'/>";
     print "<input type='hidden' name='ar' value='$row[AR]'/>";
-    
 	print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
-    //var_dump($_COOKIE);
-    print "</div><br>";
+    print "</div>";
     print "</form>";
-    //print "</table>\n";
+    }
+    print "<br>";
 }
 
 oci_free_statement($stid2);
