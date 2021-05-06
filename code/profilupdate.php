@@ -4,7 +4,7 @@ session_start();
    $connection = DBconnection::getInstance();
 
    if(isset($_REQUEST['uname'])){ 
-       echo"itt j�";
+       echo"itt jó";
     $name = $_POST['uname'];
     $password = $_POST['pwd'];
     
@@ -15,23 +15,44 @@ session_start();
     
     
     $password = password_hash($password,PASSWORD_BCRYPT);
-     
-    $query = "UPDATE FELHASZNALO(FelhNev, Jelszo, Nev, Lakcim, Szuldatum, Email) VALUES (:name, :password, :nev, :cim, TO_DATE(:szdate,'YYYY MM DD'),:email) WHERE FelhNev = $_SESSION['Felhnev']";
-    
-    $res = oci_parse($connection->getConnection(), $query);
-
-    oci_bind_by_name($res, ':name', $name);
-    oci_bind_by_name($res, ':password', $_POST['pwd']);
-    oci_bind_by_name($res, ':email', $_POST['email']);
-    oci_bind_by_name($res, ':nev', $_POST['nev']);
-    oci_bind_by_name($res, ':cim', $_POST['cim']);
-    oci_bind_by_name($res, ':szdate', $_POST['szuldate']);
+    $sql="UPDATE FELHASZNALO SET ";
+$valtozottFelhasznalo=false;
+if($uname!=""){
+    $sql.="FelhNev='".$uname."', ";
+    $valtozottFelhasznalo=true;
+}
+if($pwd!=""){
+    $sql.="Jelszo='".$pwd."', ";
+    $valtozottFelhasznalo=true;
+}
+if($ar!=null){
+    $sql.="Nev=".$nev.", ";
+    $valtozottFelhasznalo=true;
+}
+if($forgalmazo!=-1){
+    $sql.="Lakcim=".$cim.", ";
+    $valtozottFelhasznalo=true;
+}
+if($megjelenes!=null){
+    $sql.="SzulDate='".$szuldate."', ";
+    $valtozottFelhasznalo=true;
+}
+if($leiras!=""){
+    $sql.="Email='".$email."', ";
+    $valtozottFelhasznalo=true;
+}
+$sql=substr($sql, 0, -2);
+$sql.=" WHERE FelhNev=".$_SESSION['FelhNev'];
+if($valtozottFelhasznalo){
+    $statement = $connection->parseQuery($sql);
+    oci_execute($statement);
+}
 
     if(oci_execute($res)===false){
         var_dump(oci_error($res));
     }else{
         //oci_commit($connection->getConnection());
-        echo "Sikeres adatmod�s�t�s!!! :D";
+        echo "Sikeres adatmodósítás!!! :D";
        // header("Location: http://localhost/Internetes_aruhaz/code/main.php");
 
 
