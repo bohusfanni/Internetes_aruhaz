@@ -1,61 +1,33 @@
 <?php
 session_start();
-   include "dbconn.php";
-   $connection = DBconnection::getInstance();
+if(isset($_POST['changeuser'])){
+    include 'dbconn.php';
 
-   if(isset($_REQUEST['uname'])){ 
-       echo"itt jó";
-    $name = $_POST['uname'];
-    $password = $_POST['pwd'];
-    
-    $email = $_POST['email'];
-    $nev = $_POST['nev'];
-    $cim = $_POST['cim'];
-    $szdate = $_POST['szuldate'];
-    
-    
-    $password = password_hash($password,PASSWORD_BCRYPT);
-    $sql="UPDATE FELHASZNALO SET ";
-$valtozottFelhasznalo=false;
-if($uname!=""){
-    $sql.="FelhNev='".$uname."', ";
-    $valtozottFelhasznalo=true;
-}
-if($pwd!=""){
-    $sql.="Jelszo='".$pwd."', ";
-    $valtozottFelhasznalo=true;
-}
-if($nev!=null){
-    $sql.="Nev=".$nev.", ";
-    $valtozottFelhasznalo=true;
-}
-if($lakcim!=""){
-    $sql.="Lakcim=".$cim.", ";
-    $valtozottFelhasznalo=true;
-}
-if($szdate!=""){
-    $sql.="SzulDate='".$szdate."', ";
-    $valtozottFelhasznalo=true;
-}
-if($email!=""){
-    $sql.="Email='".$email."', ";
-    $valtozottFelhasznalo=true;
-}
-$sql=substr($sql, 0, -2);
-$sql.=" WHERE FelhNev=".$_SESSION['FelhNev'];
-if($valtozottFelhasznalo){
-    $statement = $connection->parseQuery($sql);
-    oci_execute($statement);
-}
-
-    if(oci_execute($res)===false){
-        var_dump(oci_error($res));
-    }else{
-        //oci_commit($connection->getConnection());
-        echo "Sikeres adatmodósítás!!! :D";
-       // header("Location: http://localhost/Internetes_aruhaz/code/main.php");
-
-
+    $connection = DBconnection::getInstance();
+    if($connection->getConnection()){
+        exit(420);
     }
+
+    $email = $_POST['user_email'];
+    $postcode = $_POST['postcode'];
+    $city = $_POST['city'];
+    $address = $_POST['address'];
+    $phone = $_POST['phonenum'];
+
+    $query = "UPDATE USERS SET POST_CODE=:pcode , CITY=:city , HOME_ADDRESS=:addr,PHONE_NUM=:pnum WHERE EMAIL=:mail";
+    $query = oci_parse($connection,$query);
+    oci_bind_by_name($query,":pcode",$postcode);
+    oci_bind_by_name($query,":city",$city);
+    oci_bind_by_name($query,":addr",$address);
+    oci_bind_by_name($query,":pnum",$phone);
+    oci_bind_by_name($query,":mail",$email);
+
+    if(oci_execute($query)){
+        header('Location: /php/userinfo.php?id='.$email);
+        return;
+    }
+    echo "Valami hiba lehet";
+    var_dump($_POST);
+}else{
+    header("Location: /php/login.php");
 }
-    ?>

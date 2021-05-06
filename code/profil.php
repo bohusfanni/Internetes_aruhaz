@@ -12,76 +12,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
 
-
-.open-button {
-  background-color: Blue;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
-
-
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-}
-
-
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-
-.form-container .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-
-.form-container .cancel {
-  background-color: Red;
-}
-
-
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
   
 </style>
 <body>
@@ -97,24 +28,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
         </form>
     </div>
 </div>
-<?php 
-     include "dbconn.php";
-   $conn = DBconnection::getInstance();
-   $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
-   $parsed=oci_parse($conn,$querry);
-   oci_bind_by_name($parsed,"felh",$_SESSION['FelhNev']);
-   if(oci_execute($parsed)){
-    while()$row=oci_feth_array($parsed){
-        $email= $row['Email'];
-        $pwd= $row['Jelszo'];
-        $name= $row['Nev'];
-        $uname= $row['FelhNev'];
-        $szdate= $row['SzulDate'];
-        $cim= $row['Lakcim'];
-        }
-   }
-    
-   ?>
+
 
 
 
@@ -126,50 +40,44 @@ body {font-family: Arial, Helvetica, sans-serif;}
             <img class="card-img-top" src="profil.jpg" alt="Card image">
             <div class="card-body">
               <h4 class="card-title">Legjobb Felhasználó</h4>
-              <p id="nev" class="card-text"><?php session_start(); echo $_SESSION["Felhnev"]?></p>
-              
-              <button class="open-button" onclick="openForm()">Profil szerkesztése</button>
-
-<div class="form-popup" id="myForm">
-  <form action="profilupdate.php" class="form-container">
-    <h1>Szerkesztés</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Adja meg az új email címét" name="email" value="$email" >
-
-    <label for="pwd"><b>Jelszó</b></label>
-    <input type="password" placeholder="Adja meg az új jelszavát" name="pwd" value="$pwd">
-    <label for="name"><b>Név</b></label>
-    <input type="text" placeholder="Adja meg az új nevét" name="name"value="$name" >
-
-    <label for="uname"><b>Felhasználónév</b></label>
-    <input type="text" placeholder="Adja meg az új Felhasználónevét" name="uname" value="$uname">
-    <label for="szuldate"><b>Születési év</b></label>
-    <input type="date" placeholder="Adja meg az új születési évét" name="szuldate" value="$szdate">
-
-    <label for="cim"><b>Lakcím</b></label>
-    <input type="text" placeholder="Adja meg az új lakcímét" name="cim"value="$cim" >
-
-
-   
-
-    <button type="submit" class="btn">Frissít</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Mégse</button>
-  </form>
-</div>
-              <script>
-               function openForm() {
-                 document.getElementById("myForm").style.display = "block";
-                    }
-
-                    function closeForm() {
-                         document.getElementById("myForm").style.display = "none";
-                                          }
-              </script>
-     
-              
-
+              <p id="nev" class="card-text"><?php session_start(); echo "Bejelentkezve: " . $_SESSION["Felhnev"]?></p>
             </div>
+<form method="post" action="profilupdate.php">
+<?php 
+
+     include "dbconn.php";
+   $conn = DBconnection::getInstance();
+   $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
+   $parsed=oci_parse($conn->getConnection(),$query);
+   oci_bind_by_name($parsed, ":felh", $_SESSION['Felhnev']);
+   if(oci_execute($parsed)){
+    while($row=oci_fetch_array($parsed)){
+        $email= $row['EMAIL'];
+        $pwd= $row['JELSZO'];
+        $name= $row['NEV'];
+        $uname= $row['FELHNEV'];
+        $szdate= $row['SZULDATUM'];
+        $cim= $row['LAKCIM'];
+
+                echo '<label for="mail">Email</label>';
+                echo "<input type='text' id='mail'  value='$email'><br>";
+                echo '<label for="fistname">Jelszo</label>';
+                echo "<input type='text' id='Jelszo' value='$pwd' ><br>";
+                echo '<label for="lastname">Név</label>';
+                echo "<input type='text' id='name' value='$name'  ><br>";
+                echo  '<label for="bdate">Felhasznalo Nev</label>';
+                echo "<input type='text' id='uname' value='$uname' ><br>";
+
+                echo ' <label for="country">Születési dátum </label>';
+                echo "<input type='text' id='szdate' value='$szdate' ><br>";
+
+                echo '<label for="postcode">Lakcím</label>';
+                echo  "<input type='text' id='cim' name='postcode' value='$cim' required><br>";
+    }
+  }  
+   ?>
+   <input type='submit' name="changeuser" value="Adatok módosítása">
+   </form>
           </div>
 
 </div>
