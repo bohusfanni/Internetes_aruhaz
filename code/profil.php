@@ -12,7 +12,10 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <style>
-
+ a, a:hover{
+     color: black;
+     text-decoration: none;
+ }
   
 </style>
 <body>
@@ -23,8 +26,8 @@
             <img src="tecso.png" alt="logo" width="200">
         </div>
         <form>
-            <button type="button" class="btn btn-secondary"><a href="main.php">Főoldal</a></button>
-            <button type="button" class="btn btn-secondary"><a href="logout.php">Kijelentkezés</a></button>
+            <button type="button" class="btn btn-info"><a href="main.php">Főoldal</a></button>
+            <button type="button" class="btn btn-info"><a href="logout.php">Kijelentkezés</a></button>
         </form>
     </div>
 </div>
@@ -36,54 +39,54 @@
 <div class="container" style="padding-top: 1cm;">
         <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Profil</h1>
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
-        <div class="col-3">
+        <div class="col">
             <div class="card" style="width:300px" style="align-items: center;">
                 <img class="card-img-top" src="profil.jpg" alt="Card image">
                 <div class="card-body">
                 <h4 class="card-title">Legjobb Felhasználó</h4>
                 <p id="nev" class="card-text"><?php session_start(); echo "Bejelentkezve: " . $_SESSION["Felhnev"]?></p>
-                </div>
             </div>
         </div>
+
         
 <form method="POST" action="profilupdate.php">
 <?php 
 
-     include "dbconn.php";
-   $conn = DBconnection::getInstance();
-   $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
-   $parsed=oci_parse($conn->getConnection(),$query);
-   oci_bind_by_name($parsed, ":felh", $_SESSION['Felhnev']);
-   if(oci_execute($parsed)){
-    while($row=oci_fetch_array($parsed)){
-        $email= $row['EMAIL'];
-        $pwd= $row['JELSZO'];
-        $name= $row['NEV'];
-        $uname= $row['FELHNEV'];
-        $szdate= $row['SZULDATUM'];
-        $cim= $row['LAKCIM'];
-
-                echo '<label for="mail">Email: </label>';
-                echo "<input type='text' name='mail'  value='$email'><br>";
-                echo '<label for="fistname">Jelszo: </label>';
-                echo "<input type='text' name='Jelszo' value='$pwd' ><br>";
-                echo '<label for="lastname">Név: </label>';
-                echo "<input type='text' name='name' value='$name'  ><br>";
-                echo  '<label for="bdate">Felhasznalo Név: </label>';
-                echo "<input type='text' name='uname' value='$uname' disabled><br>";
-
-                echo ' <label for="country">Születési dátum:  </label>';
-                echo "<input type='text' name='szdate' value='$szdate' ><br>";
-
-                echo '<label for="postcode">Lakcím: </label>';
-                echo  "<input type='text' id='cim' name='cim' value='$cim'><br>";
-    }
-  }  
+    include "dbconn.php";
+    $conn = DBconnection::getInstance();
+    $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
+    $parsed=oci_parse($conn->getConnection(),$query);
+    oci_bind_by_name($parsed, ":felh", $_SESSION['Felhnev']);
+    if(oci_execute($parsed)){
+        while($row=oci_fetch_array($parsed)){
+            $email= $row['EMAIL'];
+            $pwd= $row['JELSZO'];
+            $name= $row['NEV'];
+            $uname= $row['FELHNEV'];
+            $szdate= $row['SZULDATUM'];
+            $cim= $row['LAKCIM'];
+                    echo "<div class='container'>";
+                    echo '<label for="mail">Email: </label>';
+                    echo "<input type='text' name='mail'  value='$email'><br>";
+                    echo '<label for="fistname">Jelszo: </label>';
+                    echo "<input type='text' name='Jelszo' value='$pwd' ><br>";
+                    echo '<label for="lastname">Név: </label>';
+                    echo "<input type='text' name='name' value='$name'  ><br>";
+                    echo  '<label for="bdate">Felhasznalo Név: </label>';
+                    echo "<input type='text' name='uname' value='$uname' disabled><br>";
+                    echo ' <label for="country">Születési dátum:  </label>';
+                    echo "<input type='text' name='szdate' value='$szdate' ><br>";
+                    echo '<label for="postcode">Lakcím: </label>';
+                    echo  "<input type='text' id='cim' name='cim' value='$cim'><br>";
+                    echo "</div>";
+        }
+    }  
    ?>
-   <input type='submit' name="changeuser" value="Adatok módosítása">
-   </form>
+    
+    <input type='submit' class="btn btn-info" name="changeuser" value="Adatok módosítása">
+    </form>
     </div>
-    <div class="col-3">
+    <div class="col">
     <form method="POST" action="profilupdate.php">
         <?php
 $stid = oci_parse($conn->getConnection(), "SELECT * FROM rendel WHERE FelhNev=:felhnev");
@@ -109,7 +112,7 @@ while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 print "</table><br>\n";
 oci_free_statement($stid);
 ?>
- <input type='submit' name="finifh" value="Megrendel">
+ <input type='submit' class="btn btn-info" name="finish" value="Megrendel">
 </form>
         </div>
 </body>
