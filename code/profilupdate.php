@@ -1,29 +1,25 @@
 <?php
 session_start();
-if(isset($_POST['changeuser'])){
-    include 'dbconn.php';
+include "dbconn.php";
+   $conn = DBconnection::getInstance();
 
-    $connection = DBconnection::getInstance();
-    if($connection->getConnection()){
-        exit(420);
-    }
+        $email= $POST['EMAIL'];
+        $pwd= $POST['JELSZO'];
+        $name= $POST['NEV'];
+        $uname= $POST['FELHNEV'];
+        $szdate= $POST['SZULDATUM'];
+        $cim= $POST['LAKCIM'];
 
-    $email = $_POST['user_email'];
-    $postcode = $_POST['postcode'];
-    $city = $_POST['city'];
-    $address = $_POST['address'];
-    $phone = $_POST['phonenum'];
-
-    $query = "UPDATE USERS SET POST_CODE=:pcode , CITY=:city , HOME_ADDRESS=:addr,PHONE_NUM=:pnum WHERE EMAIL=:mail";
+    $query = "UPDATE FELHASZNALO SET FELHNEV=:uname, EMAIL=:email , SZULDATE=:szdate,LAKCIM=:cim,JELSZO=:pwd WHERE EMAIL=:email";
     $query = oci_parse($connection,$query);
-    oci_bind_by_name($query,":pcode",$postcode);
-    oci_bind_by_name($query,":city",$city);
-    oci_bind_by_name($query,":addr",$address);
-    oci_bind_by_name($query,":pnum",$phone);
-    oci_bind_by_name($query,":mail",$email);
+    oci_bind_by_name($query,":felhnev",$uname);
+    oci_bind_by_name($query,":jelszo",$pwd);
+    oci_bind_by_name($query,":nev",$name);
+    oci_bind_by_name($query,":lakcim",$cim);
+    oci_bind_by_name($query,":email",$email);
 
     if(oci_execute($query)){
-        header('Location: /php/userinfo.php?id='.$email);
+        header('Location: /php/profil.php?id='.$email);
         return;
     }
     echo "Valami hiba lehet";
