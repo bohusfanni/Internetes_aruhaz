@@ -59,19 +59,19 @@
         $szdate= $row['SZULDATUM'];
         $cim= $row['LAKCIM'];
 
-                echo '<label for="mail">Email</label>';
+                echo '<label for="mail">Email: </label>';
                 echo "<input type='text' id='mail'  value='$email'><br>";
-                echo '<label for="fistname">Jelszo</label>';
+                echo '<label for="fistname">Jelszo: </label>';
                 echo "<input type='text' id='Jelszo' value='$pwd' ><br>";
-                echo '<label for="lastname">Név</label>';
+                echo '<label for="lastname">Név: </label>';
                 echo "<input type='text' id='name' value='$name'  ><br>";
-                echo  '<label for="bdate">Felhasznalo Nev</label>';
+                echo  '<label for="bdate">Felhasznalo Név: </label>';
                 echo "<input type='text' id='uname' value='$uname' ><br>";
 
-                echo ' <label for="country">Születési dátum </label>';
+                echo ' <label for="country">Születési dátum:  </label>';
                 echo "<input type='text' id='szdate' value='$szdate' ><br>";
 
-                echo '<label for="postcode">Lakcím</label>';
+                echo '<label for="postcode">Lakcím: </label>';
                 echo  "<input type='text' id='cim' name='postcode' value='$cim' required><br>";
     }
   }  
