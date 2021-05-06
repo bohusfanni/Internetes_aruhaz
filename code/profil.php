@@ -97,6 +97,21 @@ body {font-family: Arial, Helvetica, sans-serif;}
         </form>
     </div>
 </div>
+<?php 
+     include "dbconn.php";
+   $conn = DBconnection::getInstance();
+   $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
+   $parsed=oci_parse($conn,$querry);
+   oci_bind_by_name($parsed,"felh",$_SESSION['FelhNev']);
+   $email= $row['Email'];
+   $pwd= $row['Jelszo'];
+   $name= $row['Nev'];
+   $uname= $row['FelhNev'];
+   $szdate= $row['SzulDate'];
+   $cim= $row['Lakcim'];
+    
+   ?>
+
 
 
 
@@ -113,23 +128,23 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div class="form-popup" id="myForm">
   <form action="profilupdate.php" class="form-container">
-    <h1>Login</h1>
+    <h1>Szerkesztés</h1>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Adja meg az új email címét" name="email" >
+    <input type="text" placeholder="Adja meg az új email címét" name="email" value="$email" >
 
     <label for="pwd"><b>Jelszó</b></label>
-    <input type="password" placeholder="Adja meg az új jelszavát" name="pwd" >
+    <input type="password" placeholder="Adja meg az új jelszavát" name="pwd" value="$pwd">
     <label for="name"><b>Név</b></label>
-    <input type="text" placeholder="Adja meg az új nevét" name="name" >
+    <input type="text" placeholder="Adja meg az új nevét" name="name"value="$name" >
 
     <label for="uname"><b>Felhasználónév</b></label>
-    <input type="text" placeholder="Adja meg az új Felhasználónevét" name="uname" >
+    <input type="text" placeholder="Adja meg az új Felhasználónevét" name="uname" value="$uname">
     <label for="szuldate"><b>Születési év</b></label>
-    <input type="date" placeholder="Adja meg az új születési évét" name="szuldate" >
+    <input type="date" placeholder="Adja meg az új születési évét" name="szuldate" value="$szdate">
 
     <label for="cim"><b>Lakcím</b></label>
-    <input type="text" placeholder="Adja meg az új lakcímét" name="cim" ><label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Adja meg az új lakcímét" name="cim"value="$cim" >
 
 
    
@@ -154,6 +169,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
           </div>
 
 </div>
+      
 
 </body>
 </html>

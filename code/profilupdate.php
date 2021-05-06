@@ -25,19 +25,19 @@ if($pwd!=""){
     $sql.="Jelszo='".$pwd."', ";
     $valtozottFelhasznalo=true;
 }
-if($ar!=null){
+if($nev!=null){
     $sql.="Nev=".$nev.", ";
     $valtozottFelhasznalo=true;
 }
-if($forgalmazo!=-1){
+if($lakcim!=""){
     $sql.="Lakcim=".$cim.", ";
     $valtozottFelhasznalo=true;
 }
-if($megjelenes!=null){
-    $sql.="SzulDate='".$szuldate."', ";
+if($szdate!=""){
+    $sql.="SzulDate='".$szdate."', ";
     $valtozottFelhasznalo=true;
 }
-if($leiras!=""){
+if($email!=""){
     $sql.="Email='".$email."', ";
     $valtozottFelhasznalo=true;
 }
