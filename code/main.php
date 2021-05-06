@@ -263,7 +263,7 @@ while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	print "</table>\n";
 	print "<div class='form-group'>";
 	print "<label for='amount'>Darabszám</label>";
-	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám'> required";
+	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám' required>";
     print "<input type='hidden' name='name' value='$row[NEV]'/>";
     print "<input type='hidden' name='ar' value='$row[AR]'/>";
 	print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
