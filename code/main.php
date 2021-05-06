@@ -10,9 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <style>
+    a, a:hover{
+        color: black;
+        text-decoration: none;
+        
+    }
     body {background-color: rgb(242, 250, 250);}
     [class*="col-"]{
         width: 100%;
@@ -142,51 +148,33 @@
            <?php 
            session_start();
            if(isset($_SESSION['Felhanev'])){ // Rgazda
-               echo "you logged in as: ", $_SESSION['Felhanev'], ", mint ", $_SESSION['Role'];
-               echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
+               echo "Logged in as: ", $_SESSION['Felhanev'], ", role: ", $_SESSION['Role'];
+               echo "<br/><i class='material-icons' ><a href='logout.php' stlye='item-align: right'>logout</a></i>";
             } 
             if(isset($_SESSION['Felhasznev'])){ // Elado
                 echo "you logged in as: ", $_SESSION['Felhasznev'], ", mint ", $_SESSION['Role'];
-                echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
+                echo "<br/><i class='material-icons' ><a href='logout.php' stlye='align: left'>logout</a></i>";
             } 
           
            if(isset($_SESSION['Felhnev'])){ // Felhasznalo
                echo "you logged in as: ", $_SESSION['Felhnev'], ", mint ", $_SESSION['Role'];
-               echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
+               echo "<br/><i class='material-icons'><a href='logout.php'>logout</a></i>";
             } 
            ?>
-            <button onclick="document.getElementById('bejel').style.display='block'" type='button' class='btn btn-secondary'>Bejelentkezés</button>
+            
             <?php
             if(!isset($_SESSION['Felhnev']) && !isset($_SESSION['Felhasznev']) && !isset($_SESSION['Felhanev'])){
-                echo "<button type='button' class='btn btn-secondary' ><a href='admin_login.html'>Admin Bejelentkezés</a></button>";
-                echo "<button type='button' class='btn btn-secondary' ><a href='elado_login.html'>Elado Bejelentkezés</a></button>";
-                echo "<button type='button' class='btn btn-secondary' ><a href='registration.html'>Regisztráció</a></button>";
+                echo "<div class='btn btn-group'>";
+                echo "<button type='button' class='btn btn-info' ><a href='admin_login.html'>Admin Login</a></button>";
+                echo "<button type='button' class='btn btn-info' ><a href='elado_login.html'>Eladó Login</a></button>";
+                echo "<button type='button' class='btn btn-info' ><a href='registration.html'>Belépés</a></button>";
+                echo "</div>";
             }
             ?>
             </div>
         </form>
 <!--EZ ITT A LOGIN RÉSZ-->
-        <div id="bejel" class="modal">
-            <form class="modal-content animate" action="login.php" method="POST">
-                <div class="container">
-                    <label><b>Felhasználónév</b></label>
-                    <input type="text" placeholder="Felhasználónév" name="Felhnev" required>
         
-                    <label><b>Jelszó</b></label>
-                    <input type="password" placeholder="Jelszó" name="Jelszo" id="username" required>
-        
-                    <button class="btn btn-secondary" type="submit" name="gomb" id="password" >Bejelentkezés</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Emlékezz rám
-                    </label>
-                </div>
-        
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('bejel').style.display='none'" class="cancelbtn">Mégsem</button>
-                    <span class="psw"> <a href="#">Elfelejtetted a jelszavadat?</a></span>
-                </div>
-            </form>
-        </div>
             
     </div>
 
@@ -252,40 +240,30 @@ if(!$r){
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
 
-while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
-	print "<table border='1'>\n";
-    print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
-    print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
-    print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . " Db" . "</th></tr>" ;
+    while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        print "<table border='1'>\n";
+        print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
+        print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
+        print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . " Db" . "</th></tr>" ;
 
     if(isset($_SESSION['Felhnev'])){
-    print "<form method='POST' action='order.php' accept-charset='utf-8'>";
-	print "</table>\n";
-	print "<div class='form-group'>";
-	print "<label for='amount'>Darabszám</label>";
-	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám' required>";
-    print "<input type='hidden' name='name' value='$row[NEV]'/>";
-    print "<input type='hidden' name='ar' value='$row[AR]'/>";
-	print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
-    print "</div>";
-    print "</form>";
+        print "<form method='POST' action='order.php' accept-charset='utf-8'>";
+        print "</table>\n";
+        print "<div class='form-group'>";
+        print "<label for='amount'>Darabszám</label>";
+        print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám' required>";
+        print "<input type='hidden' name='name' value='$row[NEV]'/>";
+        print "<input type='hidden' name='ar' value='$row[AR]'/>";
+        print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
+        print "</div>";
+        print "</form>";
     }
     print "<br>";
 }
 
 oci_free_statement($stid2);
 ?>
-  
-<script>
+ 
 
-    var modal = document.getElementById('bejel');
-
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script> 
 </body>
 </html>
