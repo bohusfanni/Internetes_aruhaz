@@ -152,15 +152,18 @@
           
            if(isset($_SESSION['Felhnev'])){ // Felhasznalo
                echo "you logged in as: ", $_SESSION['Felhnev'], ", mint ", $_SESSION['Role'];
-               echo "<br/><a href='logout.php'>logout</a>";
+               echo "<br/><button type='button' class='btn btn-secondary' ><a href='logout.php'>logout</a></button>";
             } 
-           
            ?>
-                <button onclick="document.getElementById('bejel').style.display='block'" type="button" class="btn btn-secondary" >Bejelentkezés</button>
-                <button type="button" class="btn btn-secondary" ><a href="admin_login.html">Admin Bejelentkezés</a></button>
-                <button type="button" class="btn btn-secondary" ><a href="elado_login.html">Elado Bejelentkezés</a></button>
-                <button type="button" class="btn btn-secondary" ><a href="registration.html">Regisztráció</a></button>
-
+            <button onclick="document.getElementById('bejel').style.display='block'" type='button' class='btn btn-secondary' >Bejelentkezés</button>
+            <?php
+            if(!isset($_SESSION['Felhnev']) || !isset($_SESSION['Felhasznev']) || !isset($_SESSION['Felhanev'])){
+                print "";
+                echo "<button type='button' class='btn btn-secondary' ><a href='admin_login.html'>Admin Bejelentkezés</a></button>";
+                echo "<button type='button' class='btn btn-secondary' ><a href='elado_login.html'>Elado Bejelentkezés</a></button>";
+                echo "<button type='button' class='btn btn-secondary' ><a href='registration.html'>Regisztráció</a></button>";
+            }
+            ?>
             </div>
         </form>
 <!--EZ ITT A LOGIN RÉSZ-->
@@ -185,7 +188,7 @@
                 </div>
             </form>
         </div>
-
+            
     </div>
 
 </div>
@@ -261,7 +264,7 @@ while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	print "</table>\n";
 	print "<div class='form-group'>";
 	print "<label for='amount'>Darabszám</label>";
-	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám'>";
+	print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám'> required";
     print "<input type='hidden' name='name' value='$row[NEV]'/>";
     print "<input type='hidden' name='ar' value='$row[AR]'/>";
 	print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
