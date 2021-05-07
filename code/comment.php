@@ -185,97 +185,13 @@
 <div class="container" id="linkek">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="main.php">Termékek</a>
+          <a class="nav-link" href="main.php">Termékek</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="comment.php">Comment</a>
+          <a class="nav-link active" href="comment.php">Comment</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="kapcs.html">Kapcsolat</a>
         </li>
-        <?php
-            if(isset($_SESSION['Felhanev'])){
-            echo "<li class='nav-item'>";
-            echo "<a class='nav-link' href='eladoreg.html'>Eladó Létrehozás</a>";
-            echo "</li>";
-            }
-            if(isset($_SESSION['Felhnev'])){
-                echo "<li class='nav-item'>";
-                echo "<a class='nav-link' href='profil.php'>Profil</a>";
-                echo "</li>";
-                }
-                if(isset($_SESSION['Felhasznev'])){
-                    echo "<li class='nav-item'>";
-                    echo "<a class='nav-link' href='add.php'>Termék macera</a>";
-                    echo "</li>";
-                    }
-        ?> 
-      </ul>
-</div>
-
-
-
-<div class="container">
-    
-    <div class="col-sm-4">
-        
-<?php
-   include "dbconn.php";
-   $conn = DBconnection::getInstance();
-
-    $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek');
-if(!$stid2) {
-	$e = oci_error($conn->getConnection(), $query);
-	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-}
-$r = oci_execute($stid2);
-if(!$r){
-	$e = oci_error($stid2);
-	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-}
-
-    while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
-        print "<table border='1'>\n";
-        print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
-        print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
-        print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . " Db" . "</th></tr>" ;
-
-    if(isset($_SESSION['Felhnev'])){
-        print "<form method='POST' action='order.php' accept-charset='utf-8'>";
-        print "</table>\n";
-        print "<div class='form-group'>";
-        print "<label for='amount'>Darabszám</label>";
-        print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám' required>";
-        print "<input type='hidden' name='name' value='$row[NEV]'/>";
-        print "<input type='hidden' name='ar' value='$row[AR]'/>";
-        
-        print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
-        print "</div>";
-        print "</form>";
-    }
-    print "<br>";
-}
-
-oci_free_statement($stid2);
-?>
-</div> 
-        </div>
-        <!--Valamiért utána beszúr egy táblát. Jobb oldalra rendezve akarom.-->
-        <div class="row">
-        <div class="col-sm-8">
-            
-            <div class="input-group-prepend">
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                    Termékek 
-                </button>
-                <div class="dropdown-menu">
-                <a class="dropdown-item" >Csoki</a>
-                <a class="dropdown-item" >Alma</a>
-                <a class="dropdown-item" >Paradicsom</a>
-                </div>
-            </div>
-            <input type="text" class="form-control" placeholder="Comment">
-        </div>
-</div>
-</body>
-</html>
+    </body>
+    </html>
