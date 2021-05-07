@@ -141,6 +141,7 @@
 </style>
 <body>
 <div class="container">
+    
     <div class="row">
   
         <div class="col">
@@ -182,16 +183,33 @@
     </div>
 
 </div>
-<div class="container" id="linkek">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" href="main.php">Termékek</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="comment.php">Comment</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="kapcs.html">Kapcsolat</a>
-        </li>
-    </body>
-    </html>
+    <div class="container" id="linkek">
+    <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Nekünk számít az Ön véleménye!</h1>
+        <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="main.php">Termékek</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="comment.php">Comment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="kapcs.html">Kapcsolat</a>
+            </li>
+    </div>
+    <div class="container">
+        
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                    Termékek 
+                </button>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" >Csoki</a>
+                <a class="dropdown-item" >Alma</a>
+                <a class="dropdown-item" >Paradicsom</a>
+                </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+    </div>
+</body>
+</html>
