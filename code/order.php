@@ -13,7 +13,7 @@ if(isset($_POST['name'])){
     $itemname =     $_POST['name'];
     $price =        $_POST['ar'];
     $quantity =     $_POST['amount'];
-    $felhasznalo =         $_SESSION['Felhnev'];
+    $felhasznalo =  $_SESSION['Felhnev'];
  
   
  $query = "INSERT INTO RENDEL(nev, FelhNev, Darab, Ar) VALUES (:itemname, :felhasznalo, :quantity, :price)";

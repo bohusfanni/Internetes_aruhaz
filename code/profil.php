@@ -16,6 +16,12 @@
      color: black;
      text-decoration: none;
  }
+ .column {
+  float: left;
+  width: 33.3%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
   
 </style>
 <body>
@@ -39,32 +45,31 @@
 <div class="container" style="padding-top: 1cm;">
         <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Profil</h1>
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
-        <div class="col">
-            <div class="card" style="width:300px" style="align-items: center;">
+       
+            <div class="column" style="width:300px" style="align-items: center;">
                 <img class="card-img-top" src="profil.jpg" alt="Card image">
                 <div class="card-body">
                 <h4 class="card-title">Legjobb Felhasználó</h4>
                 <p id="nev" class="card-text"><?php session_start(); echo "Bejelentkezve: " . $_SESSION["Felhnev"]?></p>
+                </div>
             </div>
-        </div>
+    <div class="column">
+        <form method="POST" action="profilupdate.php">
+        <?php 
 
-        
-<form method="POST" action="profilupdate.php">
-<?php 
-
-    include "dbconn.php";
-    $conn = DBconnection::getInstance();
-    $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
-    $parsed=oci_parse($conn->getConnection(),$query);
-    oci_bind_by_name($parsed, ":felh", $_SESSION['Felhnev']);
-    if(oci_execute($parsed)){
-        while($row=oci_fetch_array($parsed)){
-            $email= $row['EMAIL'];
-            $pwd= $row['JELSZO'];
-            $name= $row['NEV'];
-            $uname= $row['FELHNEV'];
-            $szdate= $row['SZULDATUM'];
-            $cim= $row['LAKCIM'];
+        include "dbconn.php";
+        $conn = DBconnection::getInstance();
+        $query="SELECT * FROM FELHASZNALO WHERE FelhNev=:felh";
+        $parsed=oci_parse($conn->getConnection(),$query);
+        oci_bind_by_name($parsed, ":felh", $_SESSION['Felhnev']);
+        if(oci_execute($parsed)){
+            while($row=oci_fetch_array($parsed)){
+                $email= $row['EMAIL'];
+                $pwd= $row['JELSZO'];
+                $name= $row['NEV'];
+                $uname= $row['FELHNEV'];
+                $szdate= $row['SZULDATUM'];
+                $cim= $row['LAKCIM'];
                     echo "<div class='container'>";
                     echo '<label for="mail">Email: </label>';
                     echo "<input type='text' name='mail'  value='$email'><br>";
@@ -79,41 +84,48 @@
                     echo '<label for="postcode">Lakcím: </label>';
                     echo  "<input type='text' id='cim' name='cim' value='$cim'><br>";
                     echo "</div>";
-        }
-    }  
-   ?>
+            }
+        }  
+        ?>
     
     <input type='submit' class="btn btn-info" name="changeuser" value="Adatok módosítása">
     </form>
     </div>
-    <div class="col">
-    <form method="POST" action="profilupdate.php">
-        <?php
-$stid = oci_parse($conn->getConnection(), "SELECT * FROM rendel WHERE FelhNev=:felhnev");
+    <div class="column">
+    <form method="POST" action="megrendel.php">
+    
+    <?php
+    $stid = oci_parse($conn->getConnection(), "SELECT * FROM rendel WHERE FelhNev=:felhnev");
 
-oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
-if(!$stid) {
-	$e = oci_error($conn);
-	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-}
-$r = oci_execute($stid);
-if(!$r){
-	$e = oci_error($stid);
-	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-}
-print "<table border='1'>\n";
-while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
-	print "<tr>\n";
-    foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+    oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
+    if(!$stid) {
+	    $e = oci_error($conn);
+	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
     }
-    print "</tr>\n";
-}
-print "</table><br>\n";
-oci_free_statement($stid);
-?>
- <input type='submit' class="btn btn-info" name="finish" value="Megrendel">
-</form>
-        </div>
+    $r = oci_execute($stid);
+    if(!$r){
+	    $e = oci_error($stid);
+	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+    print "<table border='1'>\n";
+    $value = 0;
+    while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+	    print "<tr>\n";
+        $value += $row['AR'] * $row['DARAB'];
+        foreach ($row as $item) {
+            
+            print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        }
+        print "<input type='hidden' name='name' value='$row[FELHNEV]'/>";
+        print "<input type='hidden' name='vegosszeg' value='$value'/>";
+        print "</tr>\n";
+    }
+    print "</table><br>\n";
+    oci_free_statement($stid);
+    ?>
+    <input type='submit' class="btn btn-info" name="finish" value="Megrendel">
+    </form>
+    </div>
+</div>
 </body>
 </html>
