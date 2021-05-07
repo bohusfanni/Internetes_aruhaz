@@ -6,3 +6,4 @@ BEGIN
     UPDATE Rendel SET megrendelt=1;
 END;
 /
+

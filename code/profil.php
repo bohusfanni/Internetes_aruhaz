@@ -96,18 +96,24 @@
     
     <?php
     $stid = oci_parse($conn->getConnection(), "SELECT nev, Darab, Ar FROM rendel WHERE FelhNev=:felhnev and megrendelt=0");
+    $stid2 = oci_parse($conn->getConnection(), "SELECT TorzsvE FROM torzsvasarlo WHERE FelhNev=:felhnev");
 
     oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
-    if(!$stid) {
+    oci_bind_by_name($stid2, ':felhnev', $_SESSION['Felhnev']);
+    if(!$stid || !$stid2) {
 	    $e = oci_error($conn);
 	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
     }
     $r = oci_execute($stid);
-    if(!$r){
+    $t = oci_execute($stid2);
+    if(!$r || !$t){
 	    $e = oci_error($stid);
 	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+        $w = oci_error($stid2);
+	    trigger_error(htmlentities($w['message'], ENT_QUOTES), E_USER_ERROR);
     }
     print "<table border='1'>\n";
+
     $value = 0;
     while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	    print "<tr>\n";
@@ -117,11 +123,16 @@
             print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
         }
         print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";
+        $torzsv = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS);
+        if($torzsv['TORZSVE'] == 1){
+            $value *= 0.85;
+        } 
         print "<input type='hidden' name='vegosszeg' value='$value'/>";
         print "</tr>\n";
     }
    
     print "</table><br>\n";
+   
     print "Fizetendő összeg: " . $value . " Ft";
     oci_free_statement($stid);
     ?>
