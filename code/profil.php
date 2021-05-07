@@ -95,7 +95,7 @@
     <form method="POST" action="megrendel.php">
     
     <?php
-    $stid = oci_parse($conn->getConnection(), "SELECT * FROM rendel WHERE FelhNev=:felhnev");
+    $stid = oci_parse($conn->getConnection(), "SELECT nev, Darab, Ar FROM rendel WHERE FelhNev=:felhnev and megrendelt=0");
 
     oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
     if(!$stid) {
@@ -116,11 +116,13 @@
             
             print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
         }
-        print "<input type='hidden' name='name' value='$row[FELHNEV]'/>";
+        print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";
         print "<input type='hidden' name='vegosszeg' value='$value'/>";
         print "</tr>\n";
     }
+   
     print "</table><br>\n";
+    print "Fizetendő összeg: " . $value . " Ft";
     oci_free_statement($stid);
     ?>
     <input type='submit' class="btn btn-info" name="finish" value="Megrendel">

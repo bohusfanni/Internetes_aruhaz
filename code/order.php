@@ -16,7 +16,7 @@ if(isset($_POST['name'])){
     $felhasznalo =  $_SESSION['Felhnev'];
  
   
- $query = "INSERT INTO RENDEL(nev, FelhNev, Darab, Ar) VALUES (:itemname, :felhasznalo, :quantity, :price)";
+ $query = "INSERT INTO RENDEL(nev, FelhNev, Darab, Ar, megrendelt) VALUES (:itemname, :felhasznalo, :quantity, :price, DEFAULT)";
 
  $res = oci_parse($connection->getConnection(), $query);
 

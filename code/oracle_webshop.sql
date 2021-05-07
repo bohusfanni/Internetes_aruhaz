@@ -90,7 +90,8 @@ create table RENDEL(
  FOREIGN KEY(FelhNev) REFERENCES FELHASZNALO(FELHNEV),
  Darab NUMBER(5),
  Ar NUMBER(10),
- FOREIGN KEY(Ar) REFERENCES TERMEK(AR)
+ FOREIGN KEY(Ar) REFERENCES TERMEK(AR),
+ megrendelt NUMBER(1) DEFAULT 0
 );
 
 -- adatbázist feltöltő adatok --

@@ -1,5 +1,5 @@
 <?php
-    var_dump($_POST);
+    //var_dump($_POST);
     session_start();
     include "dbconn.php";
     $connection = DBconnection::getInstance();
@@ -10,8 +10,7 @@
     
         $price =        $_POST['vegosszeg'];
         $felhasznalo =  $_SESSION['Felhnev'];
-     
-      
+    
      $query = "INSERT INTO MEGRENDELES(Azon, FelhNev, Idopont, Osszeg) VALUES (dbms_random.value(100,999), :felhasznalo, SYSDATE, :price)";
     
      $res = oci_parse($connection->getConnection(), $query);

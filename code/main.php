@@ -254,6 +254,7 @@ if(!$r){
         print "<input type='number' name='amount' class='form-control' id='darab' placeholder='Darabszám' required>";
         print "<input type='hidden' name='name' value='$row[NEV]'/>";
         print "<input type='hidden' name='ar' value='$row[AR]'/>";
+        
         print "<input type='submit' class='btnAddAction' value='Kosárba' placeholder='Megrendel' ></input>";
         print "</div>";
         print "</form>";
