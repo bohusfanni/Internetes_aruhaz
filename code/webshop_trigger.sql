@@ -7,7 +7,7 @@ BEGIN
 END;
 /
 
-create or replace TRIGGER update_termek
+CREATE OR REPLACE TRIGGER update_termek
   BEFORE DELETE OR INSERT OR UPDATE ON rendel
   FOR EACH ROW
 DECLARE
@@ -36,10 +36,11 @@ END;
 
 CREATE OR REPLACE TRIGGER def_törzsv
 AFTER INSERT
-ON felhasznalo
+ON FELHASZNALO
 FOR EACH ROW
 BEGIN
-    INSERT INTO torzsvasarlo (FelhNev, TorzsvE) VALUES(:new.FelhNev, 0);
+    INSERT INTO torzsvasarlo(FelhNev, TorzsvE) VALUES(:new.FelhNev, 0);
 END;
 /
+
 commit;
