@@ -48,6 +48,23 @@
         <li class="nav-item">
           <a class="nav-link active" href="kapcs.html">Kapcsolat</a>
         </li>
+        <?php
+            if(isset($_SESSION['Felhanev'])){
+            echo "<li class='nav-item'>";
+            echo "<a class='nav-link' href='eladoreg.html'>Eladó Létrehozás</a>";
+            echo "</li>";
+            }
+            if(isset($_SESSION['Felhnev'])){
+                echo "<li class='nav-item'>";
+                echo "<a class='nav-link' href='profil.php'>Profil</a>";
+                echo "</li>";
+                }
+            if(isset($_SESSION['Felhasznev'])){
+                echo "<li class='nav-item'>";
+                echo "<a class='nav-link' href='add.php'>Termék macera</a>";
+                echo "</li>";
+                }
+        ?> 
     </ul>
 </div>
 <div class="container">
@@ -58,7 +75,7 @@
                 <div class="card-body">
                 <h4 class="card-title">Kopanecz Tamás</h4>
                 <p class="card-text">Email</p>
-                <p class="card-text">Adatbázis megművelő</p>
+                <p class="card-text">Last standing Backendes.</p>
                 </div>
             </div>
         </div>

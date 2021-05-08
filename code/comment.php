@@ -183,6 +183,20 @@
     </div>
 
 </div>
+<?php
+   include "dbconn.php";
+   $conn = DBconnection::getInstance();
+    $stid2 = oci_parse($conn->getConnection(), 'SELECT * FROM termek');
+if(!$stid2) {
+	$e = oci_error($conn->getConnection(), $query);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+$r = oci_execute($stid2);
+if(!$r){
+	$e = oci_error($stid2);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+?>
     <div class="container" id="linkek">
     <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Nekünk számít az Ön véleménye!</h1>
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
@@ -194,22 +208,32 @@
                 <a class="nav-link active" href="comment.php">Comment</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="kapcs.html">Kapcsolat</a>
+                <a class="nav-link" href="kapcs.php">Kapcsolat</a>
             </li>
     </div>
+    <form method="POST" action="make_comment.php" accept-charset="utf-8">
     <div class="container">
-        
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                    Termékek 
-                </button>
-                <div class="dropdown-menu">
-                <a class="dropdown-item" >Csoki</a>
-                <a class="dropdown-item" >Alma</a>
-                <a class="dropdown-item" >Paradicsom</a>
-                </div>
+    <label for="item">Termék</label><br>
+    <?php
+        echo "<select name='item'>";
+        while($row = oci_fetch_array($stid2)) 
+        {
+            echo "'<option name='item' id='item'> $row[NEV] </option>'";
+        }
+        echo "</select>";
+        oci_free_statement($stid2);
+        ?>                
         <div class="form-group">
-            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
         </div>
+        <?php
+        if(isset($_SESSION['Felhnev'])){
+        print "<div class='text-center'>";
+        print "<input type='submit' class='btn btn-outline-dark' name='make_comment' value='Mentés'></input>";
+        }
+        ?>
+        </form>
+    </div>
     </div>
 </body>
 </html>

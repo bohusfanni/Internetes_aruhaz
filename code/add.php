@@ -44,8 +44,6 @@ if(!$r){
 	$e = oci_error($stid2);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-
-
 ?>
 
 <div class="container" style="padding-top: 1cm;">

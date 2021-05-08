@@ -116,16 +116,23 @@
 
     $value = 0;
     //táblázat felső sora h mi is látható
+   
     while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
         $t = oci_execute($stid2);
 	    print "<tr>\n";
         $value += $row['AR'] * $row['DARAB'];
         foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") ."</td>\n";
+       
         }
+        print "<form method='POST' action='torol.php'>";
+        print "<td><input type='submit' class='btn btn-info' name='finish' value='X'></td>";
+        print "</form>";
         print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";       
         print "</tr>\n";
+        
     }
+    
     $torzsv = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS);
     if($torzsv['TORZSVE'] == 1){
         $value *= 0.85;

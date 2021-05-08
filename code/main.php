@@ -191,7 +191,7 @@
           <a class="nav-link" href="comment.php">Comment</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="kapcs.html">Kapcsolat</a>
+          <a class="nav-link" href="kapcs.php">Kapcsolat</a>
         </li>
         <?php
             if(isset($_SESSION['Felhanev'])){
@@ -204,11 +204,11 @@
                 echo "<a class='nav-link' href='profil.php'>Profil</a>";
                 echo "</li>";
                 }
-                if(isset($_SESSION['Felhasznev'])){
-                    echo "<li class='nav-item'>";
-                    echo "<a class='nav-link' href='add.php'>Termék macera</a>";
-                    echo "</li>";
-                    }
+            if(isset($_SESSION['Felhasznev'])){
+                echo "<li class='nav-item'>";
+                echo "<a class='nav-link' href='add.php'>Termék macera</a>";
+                echo "</li>";
+                }
         ?> 
       </ul>
 </div>
@@ -259,23 +259,8 @@ if(!$r){
 oci_free_statement($stid2);
 ?>
 </div> 
-        </div>
-        <!--Valamiért utána beszúr egy táblát. Jobb oldalra rendezve akarom.-->
-        <div class="row">
-        <div class="col-sm-8">
-            
-            <div class="input-group-prepend">
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                    Termékek 
-                </button>
-                <div class="dropdown-menu">
-                <a class="dropdown-item" >Csoki</a>
-                <a class="dropdown-item" >Alma</a>
-                <a class="dropdown-item" >Paradicsom</a>
-                </div>
-            </div>
-            <input type="text" class="form-control" placeholder="Comment">
-        </div>
 </div>
+</div>
+        <!--Valamiért utána beszúr egy táblát. Jobb oldalra rendezve akarom.-->
 </body>
 </html>
