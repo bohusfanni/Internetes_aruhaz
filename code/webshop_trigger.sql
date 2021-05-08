@@ -34,3 +34,12 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE TRIGGER def_törzsv
+AFTER INSERT
+ON felhasznalo
+FOR EACH ROW
+BEGIN
+    INSERT INTO torzsvasarlo (FelhNev, TorzsvE) VALUES(:new.FelhNev, 0);
+END;
+/
+commit;
