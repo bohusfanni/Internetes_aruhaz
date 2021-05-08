@@ -233,13 +233,28 @@ if(!$r){
 	$e = oci_error($stid2);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 }
-
     while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
         print "<table border='1'>\n";
         print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
         print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
         print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . " Db" . "</th></tr>" ;
 
+        print "<table border='2'>";
+        print "<tr>";
+        print "<th>Kommentek Száma: </th>";
+        //var_dump($row['NEV']);
+        $id = oci_parse($conn->getConnection(), 'SELECT COUNT(nev) FROM VELEMENY WHERE nev=:termek');
+        oci_bind_by_name($id, ':termek', $row['NEV']);
+        //var_dump($id);
+        if(oci_execute($id)){
+        //var_dump($id);
+        if($q = oci_fetch_array($id, )){
+        print "<th>". $q['COUNT(NEV)'] . "</th>";
+        }
+        }
+        print "</tr>";
+        print "<tr>";
+        print "</table>";
     if(isset($_SESSION['Felhnev'])){
         print "<form method='POST' action='order.php' accept-charset='utf-8'>";
         print "</table>\n";
@@ -253,6 +268,7 @@ if(!$r){
         print "</div>";
         print "</form>";
     }
+    
     print "<br>";
 }
 

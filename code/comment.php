@@ -213,7 +213,7 @@ if(!$r){
     </div>
     <form method="POST" action="make_comment.php" accept-charset="utf-8">
     <div class="container">
-    <label for="item">Termék</label><br>
+    <label for="item">Termék kiválsztás:</label><br>
     <?php
         echo "<select name='item'>";
         while($row = oci_fetch_array($stid2)) 

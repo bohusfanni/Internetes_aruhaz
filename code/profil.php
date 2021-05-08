@@ -38,10 +38,6 @@
     </div>
 </div>
 
-
-
-
-
 <div class="container" style="padding-top: 1cm;">
         <h1 class="text-center" style="color: rgb(99, 37, 153); font-family: 'Times New Roman', Times, serif;">Profil</h1>
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
@@ -87,7 +83,7 @@
             }
         }  
         ?>
-    
+
     <input type='submit' class="btn btn-info" name="changeuser" value="Adatok módosítása">
     </form>
     </div>

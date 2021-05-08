@@ -73,9 +73,9 @@
             <div class="card" style="width:300px">
                 <img class="card-img-top" src="tomi.png" alt="Card image">
                 <div class="card-body">
-                <h4 class="card-title">Kopanecz Tamás</h4>
+                <h4 class="card-title">Kopanecz Tamás aka(spagetti coder)</h4>
                 <p class="card-text">Email</p>
-                <p class="card-text">Last standing Backendes.</p>
+                <p class="card-text">Kokány Bt. expert.</p>
                 </div>
             </div>
         </div>
