@@ -231,6 +231,33 @@ if(!$r){
         print "<div class='text-center'>";
         print "<input type='submit' class='btn btn-outline-dark' name='make_comment' value='Mentés'></input>";
         }
+
+
+$velemeny = oci_parse($conn->getConnection(), "SELECT nev, Ertekeles, FelhNev FROM velemeny ORDER BY FelhNev");
+
+//oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
+if(!$velemeny) {
+	$e = oci_error($conn);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+$r = oci_execute($velemeny);
+if(!$r){
+	$e = oci_error($velemeny);
+	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+
+while($row = oci_fetch_array($velemeny, OCI_ASSOC+OCI_RETURN_NULLS)) {
+    print "<table border='1'>\n";
+	print "<tr>\n";
+    print "<tr><th>Termék Neve: </th><th>A Komment: </th><th>Kommentelő Neve: </th></tr>";
+    foreach ($row as $item) {
+        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+    }
+    print "</tr>\n";
+    print "</table><br>\n";
+}
+
+oci_free_statement($velemeny);
         ?>
         </form>
     </div>
