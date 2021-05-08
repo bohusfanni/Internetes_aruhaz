@@ -133,8 +133,8 @@ INSERT INTO termek VALUES('428765428','10000','Tokaji aszú','6 puttonyos Tokaji
 INSERT INTO termek VALUES('345219875','2000','Lapát','Fa nyelü ásó-lapát','16','Kert');
 INSERT INTO termek VALUES('564821564','600','marha comb','Marha alsó comb filé','124','Husok');
 INSERT INTO termek VALUES('874695123','1700','Férfi fürdőnaddrág','Férfi fürdőnadrág S/M/L/XL/XXL','6','Ferfi ruhazat');
---INSERT INTO velemeny VALUES('943582','987654321','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
---INSERT INTO velemeny VALUES('546251','428765428','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
+INSERT INTO velemeny VALUES('943582','csoki','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
+INSERT INTO velemeny VALUES('546251','Tokaji aszú','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
 INSERT INTO torzsvasarlo VALUES('BALAZS','1');
 INSERT INTO torzsvasarlo VALUES('ANYU','0');
 INSERT INTO torzsvasarlo VALUES('KopiTomi','1');

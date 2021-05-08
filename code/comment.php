@@ -233,7 +233,7 @@ if(!$r){
         }
 
 
-$velemeny = oci_parse($conn->getConnection(), "SELECT nev, Ertekeles, FelhNev FROM velemeny ORDER BY FelhNev");
+$velemeny = oci_parse($conn->getConnection(), "SELECT nev, Ertekeles, FelhNev FROM velemeny ORDER BY nev");
 
 //oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
 if(!$velemeny) {
