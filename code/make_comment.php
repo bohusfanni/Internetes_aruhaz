@@ -26,7 +26,7 @@ include "dbconn.php";
     }else{
         //oci_commit($connection->getConnection());
         echo "Sikeres felvitel";
-        //header("Location: http://localhost/Internetes_aruhaz/code/comment.php");
+        header("Location: http://localhost/Internetes_aruhaz/code/comment.php");
     }
 }
 ?>
