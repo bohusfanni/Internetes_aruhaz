@@ -7,7 +7,7 @@ if (!$conn) {
 }
 
 session_start();
-var_dump($_SESSION['Felhnev']);
+//var_dump($_SESSION['Felhnev']);
 
 print ("Létrehoz tabla");
 $stid = oci_parse($conn, "SELECT * FROM rendel WHERE FelhNev=:felhnev");
