@@ -36,6 +36,15 @@ while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 }
 print "</table><br>\n";
 oci_free_statement($stid);
+print"Melyik kategóriában van a legdrágább termék:";
+
+print"Melyik eladó készítette össze a legnagyobb rendelést:";
+print"Melyik termékből rendelték a legtöbbet:";
+print"Kategóriánként a legtöbb termék darabszám:";
+print"Melyik kategóriában hány termák van:";
+print"Melyik termékhez tartozik a a legtöbb vélemény: ";
+print"Melyik nem törzsvásárló költötte a legtöbbet:";
+
 	/*
 	$res2 = oci_parse($connection->getConnection(), $query2);
 	echo[$res2];
