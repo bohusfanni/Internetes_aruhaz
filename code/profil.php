@@ -43,10 +43,7 @@
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="main.php">Termékek</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="comment.php">Comment</a>
+                <a class="nav-link" href="comment.php">Comment</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="kapcs.php">Kapcsolat</a>

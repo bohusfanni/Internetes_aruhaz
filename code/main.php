@@ -223,7 +223,7 @@
    include "dbconn.php";
    $conn = DBconnection::getInstance();
 
-    $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek');
+    $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek WHERE Darabszam>0');
 if(!$stid2) {
 	$e = oci_error($conn->getConnection(), $query);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
