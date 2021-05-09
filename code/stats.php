@@ -153,7 +153,7 @@ while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 }
 print "</table><br>\n";
 oci_free_statement($stid);
-print"Melyik termékhez tartozik a a legtöbb vélemény: <br>";
+print"Mennyi a legtöbb komment egy termékhez: <br>";
 $stid = oci_parse($conn->getConnection(),$query7);
 
 //oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
