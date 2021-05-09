@@ -49,6 +49,7 @@
           <a class="nav-link active" href="kapcs.html">Kapcsolat</a>
         </li>
         <?php
+        session_start();
             if(isset($_SESSION['Felhanev'])){
             echo "<li class='nav-item'>";
             echo "<a class='nav-link' href='eladoreg.html'>Eladó Létrehozás</a>";

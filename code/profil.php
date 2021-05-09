@@ -43,10 +43,7 @@
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="main.php">Termékek</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="comment.php">Comment</a>
+                <a class="nav-link" href="comment.php">Comment</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="kapcs.php">Kapcsolat</a>
@@ -114,7 +111,7 @@
     oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
     $stid2 = oci_parse($conn->getConnection(), "SELECT TorzsvE FROM torzsvasarlo WHERE FelhNev=:felhnev");
     oci_bind_by_name($stid2, ':felhnev', $_SESSION['Felhnev']);
-   
+
     if(!$stid || !$stid2) {
 	    $e = oci_error($conn);
 	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -139,9 +136,7 @@
 	    print "<tr>\n";
         print "<form method='POST' action='torol.php'>";
         $value += $row['AR'] * $row['DARAB'];
-        
         print "<tr><td>". $row['NEV']. "</td><td>". $row['DARAB']." Db".  "</td><td>". $row['AR']." Ft".  "</td><td><input type='submit' class='btn btn-info' name='delete' value='X'></td></tr>";
-        
         print "";
         print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";
         print "<input type='hidden' name='id' value='$row[ID]'/>";

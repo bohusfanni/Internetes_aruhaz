@@ -21,6 +21,7 @@
             </div>
             <div class="btn btn-group">
                 <button type="submit" class="btn btn-light"><a href="main.php">Vissza a Főoldalra</a></button>
+                <button type="button" class="btn btn-info"><a href="logout.php">Kijelentkezés</a></button>
             </div>
         </div>
     
@@ -30,6 +31,44 @@
         <hr style="margin-top: 0;margin-bottom:2em;width: 50px; text-align: center;height:2px;color:rgb(255, 0, 98);background-color:rgb(255, 0, 98)">
     </div>
     <div class="container" style="padding-top: 0,5cm;">
+    <?php
+     include "dbconn.php";
+     $conn = DBconnection::getInstance();
+
+    $stid2 = oci_parse($conn->getConnection(), "SELECT Azon, nev, Osszeg, Idopont FROM megrendeles INNER JOIN felhasznalo ON felhasznalo.felhnev=megrendeles.felhnev WHERE Ready=0 ORDER BY Idopont");
+
+    if(!$stid2) {
+	    $e = oci_error($conn);
+	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+    $t = oci_execute($stid2);
+    if(!$t){
+	    $w = oci_error($stid2);
+	    trigger_error(htmlentities($w['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+    print "<table border='1'>\n";
+
+    $value = 0;
+    //táblázat felső sora h mi is látható
+
+    print "Összekészítendő rendelések: ";
+    print "<tr><th>Megrendelés azonosító: </th><th>Megrendelő: </th><th>Fizetendő összeg: </th><th>Megrendelé időpontja: </th></tr>";
+    while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        print "<form method='POST' action='set.php'>";
+        print "<tr>\n";
+        foreach ($row as $item) {
+            print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        }
+        
+        
+        print "<td><input type='submit' class='btn btn-info' name='set' value='Do'></td>";
+        print "<input type='hidden' name='azon' value='$row[AZON]'/>";
+        print "</form>";  
+        print "</tr>\n";
+    }
+    ?>
+
+
         <hr>
     </div>
 </body>

@@ -206,14 +206,15 @@
                 }
             if(isset($_SESSION['Felhasznev'])){
                 echo "<li class='nav-item'>";
-                echo "<a class='nav-link' href='add.php'>Termék macera</a>";
+                echo "<a class='nav-link' href='add.php'>Termék felvitel</a>";
+                echo "</li>";
+                echo "<li class='nav-item'>";
+                echo "<a class='nav-link' href='osszek.php'>Függő rendelések kezelése</a>";
                 echo "</li>";
                 }
         ?> 
       </ul>
 </div>
-
-
 
 <div class="container">
     
@@ -223,7 +224,7 @@
    include "dbconn.php";
    $conn = DBconnection::getInstance();
 
-    $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam FROM termek');
+    $stid2 = oci_parse($conn->getConnection(), 'SELECT Nev, Ar, Darabszam, Leiras FROM termek WHERE Darabszam>0 ORDER BY Kategoria');
 if(!$stid2) {
 	$e = oci_error($conn->getConnection(), $query);
 	trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -236,8 +237,9 @@ if(!$r){
     while($row = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS)) {
         print "<table border='1'>\n";
         print "<tr><td>Termék Neve: </td><th>" . $row['NEV'] . "</th></tr>" ;
-        print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Ft" . "</th></tr>" ;
+        print "<tr><td>Termék Ára: </td><th>" . $row['AR'] . " Teve Dollár" . "</th></tr>" ;
         print "<tr><td>Rendelkezésre álló mennyiség: </td><th>" . $row['DARABSZAM'] . " Db" . "</th></tr>" ;
+        print "<tr><td>Termék leírása: </td><th>" . $row['LEIRAS'] . "</th></tr>" ;
 
         print "<table border='2'>";
         print "<tr>";
