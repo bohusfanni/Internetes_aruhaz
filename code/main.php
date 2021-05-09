@@ -209,14 +209,12 @@
                 echo "<a class='nav-link' href='add.php'>Termék felvitel</a>";
                 echo "</li>";
                 echo "<li class='nav-item'>";
-                echo "<a class='nav-link' href='osszek.html'>Függő rendelések kezelése</a>";
+                echo "<a class='nav-link' href='osszek.php'>Függő rendelések kezelése</a>";
                 echo "</li>";
                 }
         ?> 
       </ul>
 </div>
-
-
 
 <div class="container">
     

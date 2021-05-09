@@ -105,6 +105,20 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE TRIGGER ready_order
+AFTER INSERT OR DELETE
+ON osszekeszit
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+    UPDATE megrendeles SET Ready=1 WHERE azon=:new.azon;
+    end if;
+    if deleting then
+    UPDATE megrendeles SET Ready=0 WHERE azon=:old.azon;
+    end if;
+END;
+/
+
 CREATE OR REPLACE TRIGGER update_termek
   BEFORE DELETE OR INSERT OR UPDATE ON rendel
   FOR EACH ROW
@@ -137,7 +151,7 @@ AFTER INSERT
 ON FELHASZNALO
 FOR EACH ROW
 BEGIN
-    INSERT INTO torzsvasarlo(FelhNev, TorzsvE) VALUES(:new.FelhNev, 0);
+    INSERT INTO torzsvasarlo(FelhNev, TorzsvE) VALUES(:new.FelhNev, dbms_random.value(0,1));
 END;
 /
 

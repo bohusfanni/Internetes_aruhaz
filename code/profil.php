@@ -111,7 +111,7 @@
     oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
     $stid2 = oci_parse($conn->getConnection(), "SELECT TorzsvE FROM torzsvasarlo WHERE FelhNev=:felhnev");
     oci_bind_by_name($stid2, ':felhnev', $_SESSION['Felhnev']);
-   
+
     if(!$stid || !$stid2) {
 	    $e = oci_error($conn);
 	    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -136,9 +136,7 @@
 	    print "<tr>\n";
         print "<form method='POST' action='torol.php'>";
         $value += $row['AR'] * $row['DARAB'];
-        
         print "<tr><td>". $row['NEV']. "</td><td>". $row['DARAB']." Db".  "</td><td>". $row['AR']." Ft".  "</td><td><input type='submit' class='btn btn-info' name='delete' value='X'></td></tr>";
-        
         print "";
         print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";
         print "<input type='hidden' name='id' value='$row[ID]'/>";
