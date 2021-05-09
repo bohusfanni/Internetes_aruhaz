@@ -308,8 +308,6 @@ INSERT INTO FELHASZNALO VALUES('Soapwort','Yw3DLvYSsZ2ivoH83qfH','Marshall Jacke
 INSERT INTO FELHASZNALO VALUES('Tulip','LTjJjabQsTyq1R6tjFXY','Egerton Peter','Beatty  Walk, 1201','','Peter_Egerton5863@typill.biz');
 INSERT INTO FELHASZNALO VALUES('Urn Plant','8eMhFSgQzy8LmmKTCLik','Taylor Julian','Linden Pass, 5844','','Julian_Taylor3042@womeona.net');
 INSERT INTO FELHASZNALO VALUES('Vervain','YLafutlZ4scYQeOPq4Ws','Bell Denis','Bellenden  Way, 8993','','Denis_Bell227@brety.org');
-
-
 INSERT INTO velemeny VALUES('943582','csoki','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
 INSERT INTO velemeny VALUES('546251','Tokaji aszú','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
 INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,DEFAULT,DEFAULT);

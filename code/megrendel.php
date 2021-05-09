@@ -11,7 +11,7 @@
         $price =        $_POST['vegosszeg'];
         $felhasznalo =  $_SESSION['Felhnev'];
     
-     $query = "INSERT INTO MEGRENDELES(Azon, FelhNev, Idopont, Osszeg) VALUES (dbms_random.value(100,999), :felhasznalo, SYSDATE, :price)";
+     $query = "INSERT INTO MEGRENDELES(Azon, FelhNev, Idopont, Osszeg, Ready) VALUES (dbms_random.value(100,999), :felhasznalo, SYSDATE, :price, DEFAULT)";
     
      $res = oci_parse($connection->getConnection(), $query);
     
