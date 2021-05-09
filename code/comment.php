@@ -231,6 +231,8 @@ if(!$r){
         print "<div class='text-center'>";
         print "<input type='submit' class='btn btn-outline-dark' name='make_comment' value='Mentés'></input>";
         }
+        print "</form>";
+        print "</div><br>";
 
 
 $velemeny = oci_parse($conn->getConnection(), "SELECT nev, Ertekeles, FelhNev FROM velemeny ORDER BY nev");

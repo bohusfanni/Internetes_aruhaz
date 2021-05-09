@@ -88,10 +88,10 @@
     </form>
     </div>
     <div class="column">
-    <form method="POST" action="megrendel.php">
+   
     
     <?php
-    $stid = oci_parse($conn->getConnection(), "SELECT nev, Darab, Ar FROM rendel WHERE FelhNev=:felhnev and megrendelt=0");
+    $stid = oci_parse($conn->getConnection(), "SELECT Id, nev, Darab, Ar FROM rendel WHERE FelhNev=:felhnev and megrendelt=0");
     oci_bind_by_name($stid, ':felhnev', $_SESSION['Felhnev']);
     $stid2 = oci_parse($conn->getConnection(), "SELECT TorzsvE FROM torzsvasarlo WHERE FelhNev=:felhnev");
     oci_bind_by_name($stid2, ':felhnev', $_SESSION['Felhnev']);
@@ -116,19 +116,23 @@
     while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
         $t = oci_execute($stid2);
 	    print "<tr>\n";
+        
         $value += $row['AR'] * $row['DARAB'];
         foreach ($row as $item) {
         print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") ."</td>\n";
        
         }
         print "<form method='POST' action='torol.php'>";
-        print "<td><input type='submit' class='btn btn-info' name='finish' value='X'></td>";
-        print "</form>";
-        print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";       
+        print "<td><input type='submit' class='btn btn-info' name='delete' value='X'></td>";
+        print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";
+        print "<input type='hidden' name='id' value='$row[ID]'/>";
+        print "</form>";       
         print "</tr>\n";
         
     }
-    
+    ?>
+    <form method='POST' action='megrendel.php'>
+    <?php
     $torzsv = oci_fetch_array($stid2, OCI_ASSOC+OCI_RETURN_NULLS);
     if($torzsv['TORZSVE'] == 1){
         $value *= 0.85;
