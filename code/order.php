@@ -1,6 +1,6 @@
 <?php
 session_start();
-//var_dump($_POST);
+//var_dump($row['ID']);
 //var_dump($_SESSION);
 
 include "dbconn.php";
@@ -16,7 +16,7 @@ if(isset($_POST['name'])){
     $felhasznalo =  $_SESSION['Felhnev'];
  
   
- $query = "INSERT INTO RENDEL(nev, FelhNev, Darab, Ar, megrendelt) VALUES (:itemname, :felhasznalo, :quantity, :price, DEFAULT)";
+ $query = "INSERT INTO RENDEL(Id, nev, FelhNev, Darab, Ar, megrendelt) VALUES (dbms_random.value(100,999), :itemname, :felhasznalo, :quantity, :price, DEFAULT)";
 
  $res = oci_parse($connection->getConnection(), $query);
 

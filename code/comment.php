@@ -178,7 +178,7 @@
             </div>
         </form>
 <!--EZ ITT A LOGIN RÉSZ-->
-        
+
             
     </div>
 
@@ -210,6 +210,13 @@ if(!$r){
             <li class="nav-item">
                 <a class="nav-link" href="kapcs.php">Kapcsolat</a>
             </li>
+            <?php 
+                if(isset($_SESSION['Felhnev'])){
+                    echo "<li class='nav-item'>";
+                    echo "<a class='nav-link' href='profil.php'>Profil</a>";
+                    echo "</li>";
+                    }
+            ?>
     </div>
     <form method="POST" action="make_comment.php" accept-charset="utf-8">
     <div class="container">
@@ -231,6 +238,8 @@ if(!$r){
         print "<div class='text-center'>";
         print "<input type='submit' class='btn btn-outline-dark' name='make_comment' value='Mentés'></input>";
         }
+        print "</form>";
+        print "</div><br>";
 
 
 $velemeny = oci_parse($conn->getConnection(), "SELECT nev, Ertekeles, FelhNev FROM velemeny ORDER BY nev");

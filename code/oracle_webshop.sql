@@ -10,7 +10,6 @@ DROP TABLE RGAZDA;
 DROP TABLE ELADO;
 DROP TABLE KATEGORIA;--
 
-
 create table KATEGORIA(
   Kategoria VARCHAR(23) PRIMARY KEY NOT NULL
 );
@@ -72,6 +71,7 @@ create table MEGRENDELES(
  FelhNev VARCHAR(29),
  Idopont DATE,
  Osszeg INT DEFAULT 0,
+ Ready NUMBER(1) DEFAULT 0,
  FOREIGN KEY(FelhNev) REFERENCES FELHASZNALO(FELHNEV)
  --FOREIGN KEY(TorzsvE) REFERENCES TORZSVASARLO(TORZSVE)
 );
@@ -84,6 +84,7 @@ create table OSSZEKESZIT(
 );
 
 create table RENDEL(
+ Id NUMBER(6) PRIMARY KEY NOT NULL ,
  nev VARCHAR2(30) NOT NULL,
  FOREIGN KEY(Nev) REFERENCES TERMEK(NEV),
  FelhNev VARCHAR(29) NOT NULL,
@@ -93,6 +94,52 @@ create table RENDEL(
  FOREIGN KEY(Ar) REFERENCES TERMEK(AR),
  megrendelt NUMBER(1) DEFAULT 0
 );
+
+-- Triggerek (ha külön fájlban vannak elvesznek futtatásnál)
+CREATE OR REPLACE TRIGGER kosar_reset
+AFTER INSERT
+ON megrendeles
+FOR EACH ROW
+BEGIN
+    UPDATE Rendel SET megrendelt=1;
+END;
+/
+
+CREATE OR REPLACE TRIGGER update_termek
+  BEFORE DELETE OR INSERT OR UPDATE ON rendel
+  FOR EACH ROW
+DECLARE
+    termek_amount number;
+    termek_name varchar2(200);
+    my_fancy_exception EXCEPTION;
+    PRAGMA EXCEPTION_INIT( my_fancy_exception, -20001 );
+BEGIN
+  if inserting then
+     select darabszam, nev into termek_amount, termek_name from termek where nev=:new.nev for update;
+     if (termek_amount<:new.darab) then
+       raise_application_error (-20001, 'kifogyott az '||termek_name);
+     end if;
+     update termek s set s.darabszam=s.darabszam-:new.darab
+       where s.nev=:new.nev;
+  end if;
+  if updating then
+     update termek s set s.darabszam=s.darabszam-:new.darab+:old.darab
+       where s.nev=:new.nev;
+  end if;
+  if deleting then
+     update termek s set s.darabszam=s.darabszam+:old.darab where s.nev=:old.nev;
+  end if;
+END;
+/
+
+CREATE OR REPLACE TRIGGER def_törzsv
+AFTER INSERT
+ON FELHASZNALO
+FOR EACH ROW
+BEGIN
+    INSERT INTO torzsvasarlo(FelhNev, TorzsvE) VALUES(:new.FelhNev, 0);
+END;
+/
 
 -- adatbázist feltöltő adatok --
 INSERT INTO MEGRENDELES VALUES(dbms_random.value(100,999),'','','');
@@ -380,10 +427,9 @@ INSERT INTO FELHASZNALO VALUES('Calla Lily','4BpVNFV5PIPdvJE6Lp2i','Watson Gabri
 
 INSERT INTO velemeny VALUES('943582','csoki','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
 INSERT INTO velemeny VALUES('546251','Tokaji aszú','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
-
-INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,DEFAULT);
-INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,DEFAULT);
-INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,DEFAULT);
-INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,DEFAULT);
+INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,DEFAULT,DEFAULT);
+INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,DEFAULT,DEFAULT);
+INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,DEFAULT,DEFAULT);
+INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,DEFAULT,DEFAULT);
 --INSERT INTO OSSZEKESZIT VALUES('BALAZS','654');
 commit;
