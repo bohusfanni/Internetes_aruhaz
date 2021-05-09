@@ -116,14 +116,12 @@
     while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
         $t = oci_execute($stid2);
 	    print "<tr>\n";
-        
-        $value += $row['AR'] * $row['DARAB'];
-        foreach ($row as $item) {
-        print "<td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") ."</td>\n";
-       
-        }
         print "<form method='POST' action='torol.php'>";
-        print "<td><input type='submit' class='btn btn-info' name='delete' value='X'></td>";
+        $value += $row['AR'] * $row['DARAB'];
+        print "<tr><th>Termék Neve: </th><th>Darab a kosaradban: </th><th>Ára per db: </th><th>Törlés </th></tr>";
+        print "<tr><td>". $row['NEV']. "</td><td>". $row['DARAB']." Db".  "</td><td>". $row['AR']." Ft".  "</td><td><input type='submit' class='btn btn-info' name='delete' value='X'></td></tr>";
+        
+        print "";
         print "<input type='hidden' name='name' value='$_SESSION[Felhnev]'/>";
         print "<input type='hidden' name='id' value='$row[ID]'/>";
         print "</form>";       

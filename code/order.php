@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($row['ID']);
+//var_dump($row['ID']);
 //var_dump($_SESSION);
 
 include "dbconn.php";
@@ -30,7 +30,7 @@ if(isset($_POST['name'])){
  }else{
      //oci_commit($connection->getConnection());
      echo "Sikeres felvitel";
-     //header("Location: http://localhost/Internetes_aruhaz/code/main.php");
+     header("Location: http://localhost/Internetes_aruhaz/code/main.php");
  }
 }
 
