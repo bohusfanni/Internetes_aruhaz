@@ -112,13 +112,15 @@
 
     $value = 0;
     //táblázat felső sora h mi is látható
-   
+
+    print "Ez itt a kosarad és tartalma: ";
+    print "<tr><th>Termék Neve: </th><th>Darab a kosaradban: </th><th>Ára per db: </th><th>Törlés </th></tr>";
     while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
         $t = oci_execute($stid2);
 	    print "<tr>\n";
         print "<form method='POST' action='torol.php'>";
         $value += $row['AR'] * $row['DARAB'];
-        print "<tr><th>Termék Neve: </th><th>Darab a kosaradban: </th><th>Ára per db: </th><th>Törlés </th></tr>";
+        
         print "<tr><td>". $row['NEV']. "</td><td>". $row['DARAB']." Db".  "</td><td>". $row['AR']." Ft".  "</td><td><input type='submit' class='btn btn-info' name='delete' value='X'></td></tr>";
         
         print "";
