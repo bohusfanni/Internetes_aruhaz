@@ -178,7 +178,7 @@
             </div>
         </form>
 <!--EZ ITT A LOGIN RÉSZ-->
-        
+
             
     </div>
 
@@ -210,6 +210,13 @@ if(!$r){
             <li class="nav-item">
                 <a class="nav-link" href="kapcs.php">Kapcsolat</a>
             </li>
+            <?php 
+                if(isset($_SESSION['Felhnev'])){
+                    echo "<li class='nav-item'>";
+                    echo "<a class='nav-link' href='profil.php'>Profil</a>";
+                    echo "</li>";
+                    }
+            ?>
     </div>
     <form method="POST" action="make_comment.php" accept-charset="utf-8">
     <div class="container">
