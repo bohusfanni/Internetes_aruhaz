@@ -101,7 +101,7 @@ AFTER INSERT
 ON megrendeles
 FOR EACH ROW
 BEGIN
-    UPDATE Rendel SET megrendelt=1;
+    UPDATE Rendel SET megrendelt=1 where felhnev=:new.felhnev;
 END;
 /
 
@@ -182,7 +182,7 @@ INSERT INTO letrehoz VALUES('GAZDA1','BALAZS');
 INSERT INTO letrehoz VALUES('GAZDA1','Vali');
 INSERT INTO letrehoz VALUES('GAZDA1','Cicus');
 INSERT INTO FELHASZNALO VALUES('BALAZS','ASDFG','Ficzere Balazs','2134 CSICSERI UTCA 45.',TO_DATE('2000 04 25', 'yyyy mm dd'), 'balazsvagyokhelloszia@gmail.com');
-INSERT INTO FELHASZNALO VALUES('ANYU','ARDFG','Bohus Reka', '3400 NEMECSEK UTCA 3.', TO_DATE('1950 03 02', 'yyyy mm dd'), 'anyunakhivj@gmail.com');
+INSERT INTO FELHASZNALO VALUES('Fanni','fanna','Bohus Reka', '3400 NEMECSEK UTCA 3.', TO_DATE('1950 03 02', 'yyyy mm dd'), 'anyunakhivj@gmail.com');
 INSERT INTO FELHASZNALO VALUES('KopiTomi','kopitomi','Kopanecz Tamás','2092 Tiefenweg UTCA 21.',TO_DATE('1999 08 27', 'yyyy mm dd'), 'tamas@kopanecz.hu');
 INSERT INTO FELHASZNALO VALUES('Keve','keve12','Kalotay Keve','6725 Alkony utca 31.',TO_DATE('1999 06 14', 'yyyy mm dd'), 'kkeve@gmail.com');
 INSERT INTO FELHASZNALO VALUES('Bence','x3eznt','Sárossy Bence','6485 Sarló utca 44.',TO_DATE('2000 10 10', 'yyyy mm dd'), 'bence@gmail.com');
