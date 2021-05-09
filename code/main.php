@@ -193,11 +193,13 @@
         <li class="nav-item">
           <a class="nav-link" href="kapcs.php">Kapcsolat</a>
         </li>
+        
         <?php
             if(isset($_SESSION['Felhanev'])){
             echo "<li class='nav-item'>";
             echo "<a class='nav-link' href='eladoreg.html'>Eladó Létrehozás</a>";
             echo "</li>";
+           
             }
             if(isset($_SESSION['Felhnev'])){
                 echo "<li class='nav-item'>";
@@ -210,6 +212,9 @@
                 echo "</li>";
                 echo "<li class='nav-item'>";
                 echo "<a class='nav-link' href='osszek.php'>Függő rendelések kezelése</a>";
+                echo "</li>";
+                echo "<li class='nav-item'>";
+                echo "<a class='nav-link' href='stats.php'>Fun Statisztikák</a>";
                 echo "</li>";
                 }
         ?> 

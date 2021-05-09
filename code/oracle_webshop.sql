@@ -324,9 +324,9 @@ INSERT INTO FELHASZNALO VALUES('Urn Plant','8eMhFSgQzy8LmmKTCLik','Taylor Julian
 INSERT INTO FELHASZNALO VALUES('Vervain','YLafutlZ4scYQeOPq4Ws','Bell Denis','Bellenden  Way, 8993','','Denis_Bell227@brety.org');
 INSERT INTO velemeny VALUES('943582','csoki','Praktikus a csomagolása, ellenben a porciózása az én mértékeimhez kicsit kicsi.','KopiTomi');
 INSERT INTO velemeny VALUES('546251','Tokaji aszú','csodáltaos íz mélysége van, kellően savas míg megörzi a gyümölcsösséget','BALAZS');
-INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,DEFAULT,DEFAULT);
-INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,DEFAULT,DEFAULT);
-INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,DEFAULT,DEFAULT);
-INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,DEFAULT,DEFAULT);
+INSERT INTO megrendeles VALUES('654','KopiTomi',SYSDATE,'15315',DEFAULT);
+INSERT INTO megrendeles VALUES('352','Gezuka',SYSDATE,'32825',DEFAULT);
+INSERT INTO megrendeles VALUES('513','Bence',SYSDATE,'43268',DEFAULT);
+INSERT INTO megrendeles VALUES('846','Keve',SYSDATE,'4625',DEFAULT);
 --INSERT INTO OSSZEKESZIT VALUES('BALAZS','654');
 commit;
